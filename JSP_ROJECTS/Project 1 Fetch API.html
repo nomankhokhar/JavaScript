@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <div class="jumbotron text-center">
+        <h1>JavaScript Course </h1>
+        <p>JavaScript Course 16:20 Hours First Project Fetch API</p>
+
+    </div>
+
+    <div class="jumbotron text-center">
+        <div id="card"></div>
+
+    </div>
+    <script>
+        const container = document.querySelector('#card');
+
+        const request = new XMLHttpRequest();
+        request.open('GET', 'https://restcountries.eu/rest/v2/name/nepal');
+        request.send();
+
+        request.addEventListener('load', function() {
+
+            const [data] = JSON.parse(this.responseText);
+
+            const HTMLDATA = `
+            <div class="card mb-3" style="max-width: 540px;">
+               <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="${data.flag}" class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">${data.name}</h5>
+                        <p class="${data.demonym}.</p>
+                        <p class="card-text"><small class="text-muted">${data.population}</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>`
+
+            container.insertAdjacentHTML('afterbegin', HTMLDATA);
+        });
+    </script>
+</body>
+
+</html>

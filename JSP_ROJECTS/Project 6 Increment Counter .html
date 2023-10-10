@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title> JavaScript Increment Project 5
+  </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="jumbotron text-center">
+  <h1>JavaScript Increment Project 5</h1>
+</div>
+  
+<div class="container">
+  <div class="row">
+
+
+    <div class="col-sm-4">
+<div class="counter" data-target="300" style="font-size:100px;"></div>
+       </div>
+
+
+    <div class="col-sm-4">
+        <div class="counter" data-target="500" style="font-size:100px;"></div>
+      </div>
+
+
+
+    <div class="col-sm-4">
+        <div class="counter" data-target="600" style="font-size:100px;"></div>
+      </div>
+  </div>
+</div>
+<script>
+  const counters = document.querySelectorAll('.counter');
+
+  counters.forEach((counter) => {
+
+  counter.innerHTML="0";
+
+  const updateValue=()=>{
+      const targetCount = counter.getAttribute('data-target');
+      
+      const startingCount = Number(counter.innerHTML);
+
+      const inc = targetCount/100;
+
+      if(startingCount<targetCount)
+      {
+          counter.innerHTML=`${startingCount + inc}`
+          setTimeout(updateValue,10);
+      }
+  }
+  updateValue();
+  });
+</script>
+</body>
+</html>

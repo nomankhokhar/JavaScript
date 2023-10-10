@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>ThermoMeter in JavaScript Dynamic </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="jumbotron text-center">
+  <h1>ThermoMeter in JavaScript Dynamic</h1>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-2">
+
+    </div>
+
+
+    <div class="col-sm-8">
+   <h1 style="font-size:100px;">I am ThermoMeter <span id="temp" class="fa"></span> </h1>
+    </div>
+
+
+    <div class="col-sm-2">
+
+    </div>
+  </div>
+</div>
+<script>
+
+const tempLoad =()=>{
+
+    let spana =document.getElementById("temp");
+    spana.innerHTML="&#xf2cb;"
+    spana.style.color="blue";
+
+setTimeout(()=>{
+        spana.innerHTML="&#xf2cb;"
+        spana.style.color="blue";
+    },1000);
+
+    setTimeout(()=>{
+        spana.innerHTML="&#xf2ca;"
+        spana.style.color="blue";
+    },2000);
+
+    setTimeout(()=>{
+        spana.innerHTML="&#xf2c9;"
+        spana.style.color="blue";
+    },3000);
+
+    setTimeout(()=>{
+        spana.innerHTML="&#xf2c8;"
+        spana.style.color="blue";
+
+    },4000);
+
+    setTimeout(()=>{
+        spana.innerHTML="&#xf2c7";
+        spana.style.color="red";
+    },5000);
+}
+
+
+   setInterval(tempLoad,5000);
+</script>
+</body>
+</html>

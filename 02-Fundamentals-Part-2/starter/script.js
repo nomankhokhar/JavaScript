@@ -45,19 +45,21 @@
 // -> Function Declarations vs. Expressions
 
 // Function declaration
-function calcAge1(birthYear) {
-    const age = 2037 - birthYear;
-    return age;
-}
+// function calcAge1(birthYear) {
+//     const age = 2037 - birthYear;
+//     return age;
+// }
 
-const age1 = calcAge1(1991);
-console.log(age1); // -> 46
+// const age1 = calcAge1(1991);
+// console.log(age1); // -> 46
 
-// Function expression
-const calcAge2 = function (birthYear) {
-    const age = 2037 - birthYear;
-    return age;
-}
+// Function expression is also known as anonymous function
+// const calcAge2 = function (birthYear) {
+//     const age = 2037 - birthYear;
+//     return age;
+// }
 
-const age2 = calcAge2(1991);
-console.log(age2); // -> 46
+// const age2 = calcAge2(1991);
+// console.log(age2); // -> 46
+
+// -> Arrow functions

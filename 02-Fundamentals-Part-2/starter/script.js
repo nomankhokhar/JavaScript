@@ -356,47 +356,113 @@
 
 // -> Looping Arrays, Breaking and Continuing
 
-const nomanArray = [
-    'Noman',
-    'Ali',
-    2021 - 1991,
-    'developer',
-    ['Michael', 'Peter', 'Steven'],
-    true
-];
-const types = [];
+// const nomanArray = [
+//     'Noman',
+//     'Ali',
+//     2021 - 1991,
+//     'developer',
+//     ['Michael', 'Peter', 'Steven'],
+//     true
+// ];
+// const types = [];
 
-for (let i = 0; i < nomanArray.length; i++) {
-    console.log(nomanArray[i], typeof nomanArray[i]);
+// for (let i = 0; i < nomanArray.length; i++) {
+//     console.log(nomanArray[i], typeof nomanArray[i]);
 
-    // Both are same
+//     // Both are same
 
-    // types[i] = typeof nomanArray[i];
-    types.push(typeof nomanArray[i]);
-}
+//     // types[i] = typeof nomanArray[i];
+//     types.push(typeof nomanArray[i]);
+// }
 
-console.log(types);
+// console.log(types);
 
-const years = [1991, 2007, 1969, 2020];
-const ages = [];
+// const years = [1991, 2007, 1969, 2020];
+// const ages = [];
 
-for (let i = 0; i < years.length; i++) {
-    ages.push(2021 - years[i]);
-}
+// for (let i = 0; i < years.length; i++) {
+//     ages.push(2021 - years[i]);
+// }
 
-console.log(ages);
+// console.log(ages);
 
 // continue and break
-console.log('--- ONLY STRINGS ---');
-for (let i = 0; i < nomanArray.length; i++) {
-    if (typeof nomanArray[i] !== 'string') continue;
 
-    console.log(nomanArray[i], typeof nomanArray[i]);
-}
+// console.log('--- ONLY STRINGS ---');
+// for (let i = 0; i < nomanArray.length; i++) {
+//     if (typeof nomanArray[i] !== 'string') continue;
 
-console.log('--- BREAK WITH NUMBER ---');
-for (let i = 0; i < nomanArray.length; i++) {
-    if (typeof nomanArray[i] === 'number') break;
+//     console.log(nomanArray[i], typeof nomanArray[i]);
+// }
 
-    console.log(nomanArray[i], typeof nomanArray[i]);
-}
+// console.log('--- BREAK WITH NUMBER ---');
+// for (let i = 0; i < nomanArray.length; i++) {
+//     if (typeof nomanArray[i] === 'number') break;
+
+//     console.log(nomanArray[i], typeof nomanArray[i]);
+// }
+
+
+// -> Looping Backwards and Loops in Loops
+
+// const nomanArray = [
+//     'Noman',
+//     'Ali',
+//     2021 - 1991,
+//     'developer',
+//     ['Michael', 'Peter', 'Steven'],
+//     true
+// ];
+
+// for (let i = nomanArray.length - 1; i >= 0; i--) {
+//     console.log(i, nomanArray[i]);
+// }
+
+// for (let exercise = 1; exercise < 4; exercise++) {
+//     console.log(`---- Starting exercise ${exercise}`);
+
+//     for (let rep = 1; rep < 6; rep++) {
+//         console.log(`Exercise ${exercise}: Lifting weights repetition ${rep}`);
+//     }
+// }
+
+// -> The while Loop
+
+// for (let rep = 1; rep <= 10; rep++) {
+//     console.log(`Lifting weights repetition ${rep}`);
+// }
+
+// let rep = 1;
+// while (rep <= 10) {
+//     console.log(`Lifting weights repetition ${rep}`);
+//     rep++;
+// }
+
+
+// Math.random() -> 0 to 1
+// Math.trunc() -> remove the decimal part
+// let dice = Math.trunc(Math.random() * 6) + 1; // -> 1 to 6
+
+// while (dice !== 6) {
+//     console.log(`You rolled a ${dice}`);
+//     dice = Math.trunc(Math.random() * 6) + 1;
+//     if (dice === 6) console.log('Loop is about to end...');
+// }
+
+// -> Coding Challenge #4
+
+// const calcTip = function (bill) {
+//     return bill >= 50 && bill <= 300 ? bill * 0.15 : bill * 0.20;
+// }
+
+// const bills = [125, 555, 44];
+// const tips = [];
+// const total = [];
+
+// for (let i = 0; i < bills.length; i++) {
+//     tips.push(calcTip(bills[i]));
+//     const totalBill = bills[i] + tips[i];
+//     total.push(totalBill);
+// }
+
+// console.log(bills, tips, total);

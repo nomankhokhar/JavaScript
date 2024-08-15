@@ -14,14 +14,17 @@ const displayMessage = function (message) {
 };
 
 const displayScore = function (score) {
-    document.querySelector('.score').textContent = score;
-}
+  document.querySelector('.score').textContent = score;
+};
+
+const displayMesColor = function (color) {
+  document.querySelector('.message').style.color = color;
+};
 
 document.querySelector('.check').addEventListener('click', function () {
   const guess = Number(document.querySelector('.guess').value);
-  console.log(number);
   if (guess == number) {
-    document.body.style.backgroundColor = '#60b347';
+    displayMesColor('#60b347');
     document.querySelector('.number').style.width = '30rem';
     displayMessage('🎉 Correct Number!');
     document.querySelector('.number').textContent = number;
@@ -31,14 +34,15 @@ document.querySelector('.check').addEventListener('click', function () {
     }
   } else if (!guess) {
     displayMessage('⛔️ No number!');
-  } else if (guess !== number) { 
+  } else if (guess !== number) {
     if (score > 0) {
       score--;
       displayScore(score);
       displayMessage(guess > number ? '📈 Too High!' : '📉 Too Low!');
     } else {
       displayMessage('💥 You lost the game!');
-      displayScore() = 0;
+      displayScore(0);
+      displayMesColor('red');
     }
   }
 });

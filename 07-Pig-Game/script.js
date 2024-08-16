@@ -62,7 +62,7 @@ btnRoll.addEventListener('click', function () {
 btnHold.addEventListener('click', function () {
   scores[activePlayer] += currentScore;
 
-  if (scores[activePlayer] >= 100) {
+  if (scores[activePlayer] >= 10) {
     playing = false;
     diceEl.classList.add('hidden');
     document

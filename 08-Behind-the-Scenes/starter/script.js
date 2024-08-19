@@ -134,7 +134,7 @@
 // 3. decade and millenial is in the if block scope
 // 4. job is in the second() function scope
 
-// -> Hoisting
+// -> Variable Environment Hoisting and The TDZ (temporal dead zone)
 
 // see -> Hoisting.png
 
@@ -155,3 +155,155 @@
 
 // job is in the Temporal Dead Zone
 // x Reference Error: x is not defined
+
+// -> Hoisting and TLD in Practice
+
+// ---------------------------- variable hoisting
+
+// console.log(me); // undefined
+// console.log(job); // Reference Error TLD
+// console.log(year); // Reference Error TLD
+
+// var me = 'Noman Ali';
+// let job = 'teacher';
+// const year = 1991;
+
+// ---------------------------- function hoisting
+
+// console.log(addDecl(2, 3)); // 5
+// console.log(addExpr(2, 3)); // Reference Error
+// console.log(addArrow(2, 3)); // addArrow is not a function because addArrow is Hoisted but next arrow function is not hoisted we can access it before the declaration only addArrow name
+
+// function addDecl(a, b) {
+//   return a + b;
+// }
+
+// const addExpr = function (a, b) {
+//   return a + b;
+// };
+
+// var addArrow = (a, b) => a + b;
+
+// -> Example of Hoisting
+
+// All product deleted because numProducts is undefined
+
+// console.log(numProducts); // undefined
+// if (!numProducts) deleteShoppingCart();
+
+// var numProducts = 10;
+
+// function deleteShoppingCart() {
+//   console.log('All products deleted!');
+// }
+
+// var x = 1; // Global window object because it is var -> window.x
+// let y = 2;
+// const z = 3;
+
+// console.log(x === window.x); // true
+// console.log(y === window.y); // false
+// console.log(z === window.z); // false
+
+// -> The this Keyword
+
+// Methods -> this keyword points to the object that is calling the method
+// const person = {
+//   name: 'Noman Ali',
+//   age: 30,
+//   greet() {
+//     console.log(`Hello, my name is ${this.name}`);
+//   },
+// };
+
+// person.greet();
+
+// Simple function call -> this keyword points to the window object
+// function showName() {
+//   console.log(this); // Points to `window` object in browsers not in restrict mode
+// }
+
+// showName();
+
+// Arrow function -> this keyword points to the parent scope
+// const personMan = {
+//   name: 'Noman Ali',
+//   greet: function () {
+//     const arrowFunc = () => {
+//       console.log(this.name);
+//     };
+//     arrowFunc();
+//   },
+// };
+
+// personMan.greet(); // "Noman Ali"
+
+// Event Listener -> this keyword points to the DOM element that the handler is attached to
+// const button = document.querySelector('button');
+
+// button.addEventListener('click', function () {
+//   console.log(this);
+// });
+
+// button.addEventListener('click', () => {
+//   console.log(this);
+// });
+
+// -> The this Keyword in Practice
+
+// console.log(this); // window object
+
+// Simple function call
+// const calcAge = function (birthYear) {
+//   console.log(2037 - birthYear);
+//   console.log(this); // undefined
+// };
+
+// calcAge(1991);
+
+// Arrow function
+
+// const calcAgeArrow = birthYear => {
+//   console.log(2037 - birthYear);
+//   console.log(this); // window object
+// };
+
+// calcAgeArrow(1991);
+
+// Method
+
+// const noman = {
+//   year: 1991,
+//   calcAge: function () {
+//     console.log(this); // this points to the object that is calling the method -> noman object
+//     console.log(2037 - this.year);
+//   },
+// };
+
+// noman.calcAge();
+
+// Method Borrowing
+
+// const matilda = {
+//   year: 1991,
+// };
+
+// matilda.calcAge = noman.calcAge;
+// matilda.calcAge(); // this points to the object that is calling the method -> matilda object
+
+// const f = noman.calcAge;
+// f(); // TypeError: Cannot read property 'year' of undefined
+
+// -> Regular Functions vs. Arrow Functions
+
+const noman = {
+  firstName: 'Noman',
+  year: 1991,
+  calcAge: function () {
+    console.log(this);
+    console.log(2037 - this.year);
+  },
+  greet: () => console.log(`Hey ${this.firstName}`),
+};
+
+noman.greet(); // Hey undefined

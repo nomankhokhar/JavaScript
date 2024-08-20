@@ -296,14 +296,116 @@
 
 // -> Regular Functions vs. Arrow Functions
 
-const noman = {
+// const noman = {
+//   firstName: 'Noman',
+//   year: 1991,
+//   calcAge: function () {
+//     console.log(this);
+//     console.log(2037 - this.year);
+
+//     // Solution 1
+//     const self = this; // self or that
+//     const isMillenial = function () {
+//       console.log(self);
+//       console.log(self.year >= 1981 && self.year <= 1996);
+//     };
+
+//     isMillenial();
+
+//     // Solution 2
+
+//     const isMillenialArrow = () => {
+//       console.log(this);
+//       console.log(this.year >= 1981 && this.year <= 1996);
+//     };
+//     isMillenialArrow();
+//   },
+
+//   greet: () => {
+//     console.log(this);
+//     console.log(`Hey ${this.firstName}`);
+//   },
+// };
+
+// noman.calcAge();
+// noman.greet(); // Hey undefined
+
+// Arguments Keyword in Regular Functions
+
+// const addExpr = function (a, b) {
+//   console.log(arguments); // arguments feature is only available in regular functions not in arrow functions
+// };
+
+// addExpr(2, 5, 8, 12); // 7
+
+// Arguments keyword in Arrow Function
+
+// const addArrow = (...args) => {
+//   console.log(args); // [2, 5, 8, 12]
+// };
+
+// console.log(addArrow(2, 5, 8, 12)); // 7
+
+// -> Primitives vs. Objects (Primitive vs. Reference Types)
+
+// Object are stored in the heap and the reference to the object is stored in the call stack
+// Primitives are stored in the call stack itself
+
+// Primitives
+//  Number
+//  String
+//  Boolean
+//  Undefined
+//  Null
+//  Symbol
+//  BigInt
+
+// Objects
+
+//  Object Literals
+//  Arrays
+//  Functions
+// Many more...
+
+// Primitives
+// let age = 30;
+// let oldAge = age;
+// age = 31;
+
+// console.log(age); // 31
+// console.log(oldAge); // 30
+
+// Objects
+// const me = {
+//   name: 'Noman',
+//   age: 30,
+// };
+
+// const friend = me;
+// friend.age = 27;
+
+// console.log('Friend:', friend); // 27
+// console.log('Me:', me); // 27
+
+// -> Primitives vs. Objects in Practice
+
+// Primitive Types
+let lastName = 'Noman Ali';
+let oldLastName = lastName;
+lastName = 'Khan';
+
+console.log(lastName); // Khan
+console.log(oldLastName); // Noman Ali
+
+// Reference Types
+const Noman = {
   firstName: 'Noman',
-  year: 1991,
-  calcAge: function () {
-    console.log(this);
-    console.log(2037 - this.year);
-  },
-  greet: () => console.log(`Hey ${this.firstName}`),
+  lastName: 'Ali',
+  age: 27,
 };
 
-noman.greet(); // Hey undefined
+const marriedNoman = Noman;
+marriedNoman.lastName = 'Khan';
+
+console.log('Before marriage:', Noman); // Khan
+console.log('After marriage:', marriedNoman); // Khan

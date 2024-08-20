@@ -409,3 +409,21 @@ marriedNoman.lastName = 'Khan';
 
 console.log('Before marriage:', Noman); // Khan
 console.log('After marriage:', marriedNoman); // Khan
+
+// Copying Objects
+
+const Noman2 = {
+  firstName: 'Noman',
+  lastName: 'Ali',
+  age: 27,
+  family: ['Alice', 'Bob'],
+};
+
+const NomanCopy = Object.assign({}, Noman2); // Shallow copy mean copy only internal properties not nested objects like array in the above example
+NomanCopy.lastName = 'Khan';
+
+NomanCopy.family.push('Null');
+NomanCopy.family.push('Ptr');
+
+console.log('Before marriage:', Noman2); // Khan
+console.log('After marriage:', NomanCopy); // Khan

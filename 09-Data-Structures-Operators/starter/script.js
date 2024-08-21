@@ -36,9 +36,95 @@ const restaurant = {
   orderPasta: function (ing1, ing2, ing3) {
     console.log(`Here is your delicious pasta with ${ing1}, ${ing2}, ${ing3}`);
   },
+
+  orderPizza: function (mainIngredient, ...otherIngredients) {
+    console.log(mainIngredient);
+    console.log(otherIngredients);
+  },
 };
 
-// -> Spread Operator
+// -> Short Circuiting (&& and ||)
+
+// console.log('------------OR------------');
+// console.log(3 || 'Jonas'); // 3
+// console.log('' || 'Jonas'); // Jonas
+// console.log(true || 0); // true
+// console.log(undefined || null); // null
+// console.log(null || undefined); // undefined
+// console.log(undefined || 0 || '' || 'Hello' || 23 || null); // Hello
+// console.log(undefined || 0 || '' || null); // null
+
+// const guest1 = restaurant.numGuests ? restaurant.numGuests : 10;
+// console.log(guest1); // 10
+
+// const guest2 = restaurant.numGuests || 10;
+// console.log(guest2); // 10
+
+// console.log('------------AND------------');
+// console.log(0 && 'Jonas'); // 0
+// console.log(7 && 'Jonas'); // Jonas
+// console.log('Hello' && 23 && null && 'Jonas'); // null
+// console.log('Hello' && 23 && 'Jonas'); // Jonas
+// console.log('Hello' && 23); // 23
+
+// Practical Example
+
+// if (restaurant.orderPizza) {
+//   restaurant.orderPizza('mushrooms', 'onion');
+// }
+// Above and Below are same
+// restaurant.orderPizza && restaurant.orderPizza('mushrooms', 'onion');
+
+// -> Nullish Coalescing Operator (??)
+
+// Nullish: null and undefined (NOT 0 or '')
+// const guestCorrect = restaurant.numGuests ?? 10;
+// console.log(guestCorrect); // 10
+
+// Logical Assignment Operators
+
+let guests = restaurant.numGuests || 10;
+
+// -> Rest Pattern and Parameters
+// Rest Pattern: Collects multiple elements and condenses them into an array like structure (...args) on LEFT side of = operator
+
+// Parameters: Pack elements into an array
+
+// SPREAD, because on RIGHT side of =
+// const arr = [1, 2, ...[3, 4]];
+// console.log(arr);
+
+// REST, because on LEFT side of =
+// const [a, b, ...others] = [1, 2, 3, 4, 5];
+// console.log(a, b, others); // 1 2 [ 3, 4, 5 ]
+
+// const [pizza, , risotto, ...otherFood] = [
+//   ...restaurant.mainMenu,
+//   ...restaurant.starterMenu,
+// ];
+// console.log(pizza, risotto, otherFood);
+
+// Objects
+// const { sat, ...weekdays } = restaurant.openingHours;
+// console.log(sat, weekdays);
+
+// -> Functions
+// const add = function (...numbers) {
+//   let sum = 0;
+//   for (let i = 0; i < numbers.length; i++) sum += numbers[i];
+//   console.log(sum);
+// };
+// add(2, 3); // 5
+
+// const x = [23, 5, 7];
+// add(...x); // 35
+
+// restaurant.orderPizza('mushrooms', 'onion', 'olives', 'spinach');
+// restaurant.orderPizza('mushrooms'); // 2nd Parameter will be Empty array []
+
+//
+
+// -> Spread Operator (...)
 // const arr = [7, 8, 9];
 // const badNewArr = [1, 2, ...arr];
 // console.log(badNewArr); // [ 1, 2, 7, 8, 9 ]
@@ -71,8 +157,8 @@ const restaurant = {
 // restaurant.orderPasta(...ingredients);
 
 // Objects
-const newRestaurant = { foundedIn: 1998, ...restaurant, founder: 'Guiseppe' };
-console.log(newRestaurant);
+// const newRestaurant = { foundedIn: 1998, ...restaurant, founder: 'Guiseppe' };
+// console.log(newRestaurant);
 
 // -> Destructuring Objects
 // const { name, openingHours, categories } = restaurant;

@@ -81,9 +81,47 @@ const restaurant = {
 // const guestCorrect = restaurant.numGuests ?? 10;
 // console.log(guestCorrect); // 10
 
-// Logical Assignment Operators
+// -> Logical Assignment Operators
 
-let guests = restaurant.numGuests || 10;
+// const rest1 = {
+//   name: 'Ali',
+//   numGuests: 20,
+// };
+
+// const rest2 = {
+//   name: 'Noman',
+//   owner: 'Khan',
+// };
+
+// OR Operator
+
+// rest1.numGuests = rest2.numGuests || 10;
+// rest2.numGuests = rest2.numGuests || 10;
+// Above and Below are same
+// rest1.numGuests ||= 10;
+// rest2.numGuests ||= 10;
+// console.log(rest2); // { name: 'Noman', owner: 'Khan', num Guests: 10 }
+// console.log(rest1); // { name: 'Ali', num Guests: 10 }
+
+// Nullish Coalescing Operator
+
+// rest1.numGuests ??= 10;
+// rest2.numGuests ??= 10;
+
+// console.log(rest1); // { name: 'Ali', num Guests: 20 }
+// console.log(rest2); // { name: 'Noman', owner: 'Khan', num Guests: 10 }
+
+// rest1.owner = rest2.owner ?? 'Ali';
+// rest2.owner = rest2.owner ?? 'Ali';
+// console.log(rest1); // { name: 'Ali', num Guests: 20, owner: 'Khan' }
+// console.log(rest2); // { name: 'Noman', owner: 'Khan', num Guests: 10 }
+
+// AND Operator
+
+// rest1.owner &&= 'Ali';
+// rest2.owner &&= 'Ali';
+// console.log(rest1); // { name: 'Ali', num Guests: 20, owner: 'Ali' }
+// console.log(rest2); // { name: 'Noman', owner: 'Ali', num Guests: 10 }
 
 // -> Rest Pattern and Parameters
 // Rest Pattern: Collects multiple elements and condenses them into an array like structure (...args) on LEFT side of = operator

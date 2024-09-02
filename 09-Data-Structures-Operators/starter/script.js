@@ -47,6 +47,31 @@ const restaurant = {
   },
 };
 
+// -> Maps Fundamentals
+
+const rest = new Map();
+rest.set('name', 'Noman Ali');
+rest.set(1, 'Multan, Pakistan');
+rest.set(2, 'Lahore, Pakistan');
+console.log(rest);
+
+rest
+  .set('categories', ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'])
+  .set('open', 11)
+  .set('close', 23)
+  .set(true, 'We are open')
+  .set(false, 'We are closed');
+
+console.log(rest);
+console.log(rest.get('name'));
+console.log(rest.get(true));
+console.log(rest.get(false));
+console.log(rest.get(1));
+
+const time = 21;
+const isOpen = rest.get('open') <= time && time < rest.get('close');
+console.log(rest.get(isOpen));
+
 // -> Sets
 
 // const orderSet = new Set([

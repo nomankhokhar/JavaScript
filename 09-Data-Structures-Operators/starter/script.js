@@ -47,30 +47,92 @@ const restaurant = {
   },
 };
 
+// -> Working with Strings - Part 1
+const airline = 'TAP Air Portugal';
+const plane = 'A320';
+
+console.log(plane[0]); // A
+console.log(plane[1]); // 3
+console.log(plane[2]); // 2
+console.log('B737'[0]); // B
+
+console.log(airline.length); // 16
+console.log('B737'.length); // 4
+
+// -> Which Data Structure to Use?
+
+// Array or Sets
+// Objects or Maps
+
+// 1 Arrays: Ordered, iterable, can have any data type, can contain objects, can contain arrays
+// 2 Sets: No duplicates, iterable, no indexes, can contain any data type, can contain objects, can contain arrays
+// 3 Objects: Key-value pairs, keys are strings, values can be any data type, can contain objects, can contain arrays
+// 4 Maps: Key-value pairs, keys can be any data type, values can be any data type, iterable, high-performance, easy to iterate, easy to compute size
+
+// -> Maps Iterators
+// const question = new Map([
+//   ['question', 'What is the best programming language in the world?'],
+//   [1, 'C'],
+//   [2, 'Java'],
+//   [3, 'JavaScript'],
+//   ['correct', 3],
+//   [true, 'Correct'],
+// ]);
+
+// Convert object to map
+// console.log(Object.entries(openingHours));
+// const hoursMap = new Map(Object.entries(openingHours));
+
+// for (const [key, value] of question) {
+//   if (typeof key === 'number') console.log(`Answer ${key}: ${value}`);
+// }
+
+// const answer = Number(prompt('Your answer'));
+// console.log(question.get(question.get('correct') === answer));
+
+// Convert map to array
+// console.log([...question]);
+// console.log([...question.keys()]);
+// console.log([...question.values()]);
+// console.log([...question.entries()]);
+
 // -> Maps Fundamentals
 
-const rest = new Map();
-rest.set('name', 'Noman Ali');
-rest.set(1, 'Multan, Pakistan');
-rest.set(2, 'Lahore, Pakistan');
-console.log(rest);
+// const rest = new Map();
+// rest.set('name', 'Noman Ali');
+// rest.set(1, 'Multan, Pakistan');
+// rest.set(2, 'Lahore, Pakistan');
+// console.log(rest);
 
-rest
-  .set('categories', ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'])
-  .set('open', 11)
-  .set('close', 23)
-  .set(true, 'We are open')
-  .set(false, 'We are closed');
+// rest
+//   .set('categories', ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'])
+//   .set('open', 11)
+//   .set('close', 23)
+//   .set(true, 'We are open')
+//   .set(false, 'We are closed');
 
-console.log(rest);
-console.log(rest.get('name'));
-console.log(rest.get(true));
-console.log(rest.get(false));
-console.log(rest.get(1));
+// console.log(rest);
+// console.log(rest.get('name'));
+// console.log(rest.get(true));
+// console.log(rest.get(false));
+// console.log(rest.get(1));
 
-const time = 21;
-const isOpen = rest.get('open') <= time && time < rest.get('close');
-console.log(rest.get(isOpen));
+// const time = 21;
+// const isOpen = rest.get('open') <= time && time < rest.get('close');
+// console.log(rest.get(isOpen));
+
+// console.log(rest.has('categories'));
+// rest.delete(2);
+// // set [1, 2] is not same as get [1, 2] because it is an array
+// const arr = [1, 2]; // same address in memory
+// rest.set(arr, 'Test');
+// console.log(rest.get(arr));
+
+// rest.set(document.querySelector('h1'), 'Heading');
+
+// console.log(rest);
+// console.log(rest.size);
+// rest.clear();
 
 // -> Sets
 

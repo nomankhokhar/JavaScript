@@ -51,6 +51,12 @@ const restaurant = {
 
 for (const flight of flights.split('+')) {
   const [type, from, to, time] = flight.split(';');
+  const output = `${type.startsWith('_Delayed') ? '🔴' : ''} ${type.replaceAll(
+    '_',
+    ' '
+  )} from ${from.slice(0, 3).toUpperCase()} to ${to
+    .slice(0, 3)
+    .toUpperCase()} (${time.replace(':', 'h')})`.padStart(50);
 }
 // -> Working with Strings - Part 1
 

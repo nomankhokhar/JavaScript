@@ -47,17 +47,159 @@ const restaurant = {
   },
 };
 
+// -> String Methods Practice
+
+for (const flight of flights.split('+')) {
+  const [type, from, to, time] = flight.split(';');
+}
 // -> Working with Strings - Part 1
-const airline = 'TAP Air Portugal';
-const plane = 'A320';
 
-console.log(plane[0]); // A
-console.log(plane[1]); // 3
-console.log(plane[2]); // 2
-console.log('B737'[0]); // B
+// const airline = 'TAP Air Portugal';
+// const plane = 'A320';
 
-console.log(airline.length); // 16
-console.log('B737'.length); // 4
+// console.log(plane[0]); // A
+// console.log(plane[1]); // 3
+// console.log(plane[2]); // 2
+// console.log('B737'[0]); // B
+
+// console.log(airline.length); // 16
+// console.log('B737'.length); // 4
+
+// console.log(airline.indexOf('r')); // 6
+// console.log(airline.lastIndexOf('r')); // 10
+// console.log(airline.indexOf('Portugal')); // 8
+
+// console.log(airline.slice(4)); // Air Portugal
+// console.log(airline.slice(4, 7)); // Air
+// console.log(airline.slice(0, airline.indexOf(' '))); // TAP
+
+// console.log(airline.slice(airline.lastIndexOf(' ') + 1)); // Portugal
+// console.log(airline.slice(-2)); // al
+// console.log(airline.slice(1, -1)); // AP Air Portuga
+
+// const checkMiddleSeat = function (seat) {
+//   // B and E are middle seats
+//   const s = seat.slice(-1);
+//   if (s === 'B' || s === 'E') {
+//     console.log('You got the middle seat');
+//   } else {
+//     console.log('You got lucky');
+//   }
+// };
+
+// checkMiddleSeat('11B'); // You got the middle seat
+// checkMiddleSeat('23C'); // You got lucky
+// checkMiddleSeat('3E'); // You got the middle seat
+
+// console.log(new String('jonas')); // [String: 'jonas']
+
+// -> Working with Strings - Part 2
+
+// console.log(airline.toLowerCase()); // tap air portugal
+// console.log(airline.toUpperCase()); // TAP AIR PORTUGAL
+// console.log('Jonas'.toUpperCase()); // JONAS
+
+// Fix capitalization in name
+// const passenger = 'nOmaN';
+// const passengerLower = passenger.toLowerCase();
+// const passengerCorrect =
+//   passengerLower[0].toUpperCase() + passengerLower.slice(1);
+// console.log(passengerCorrect); // Noman
+
+// Comparing emails
+// const email = 'hello@noman.com';
+// const loginEmail = '      hello@noman.Com \n';
+
+// const lowerEmail = loginEmail.toLowerCase();
+// const trimmedEmail = lowerEmail.trim();
+// console.log(trimmedEmail);
+// console.log(email === trimmedEmail); // true
+
+// Replace
+// const priceGB = '288,97£';
+// const priceUS = priceGB.replace('£', '$').replace(',', '.');
+// console.log(priceUS); // 288.97$
+
+// const announcement =
+//   'All passengers come to boarding door 23. Boarding door 23!';
+// console.log(announcement.replace('door', 'gate'));
+// console.log(announcement.replaceAll('door', 'gate'));
+
+// Regular Expression
+// console.log(announcement.replace(/door/g, 'gate'));
+
+// Booleans
+// const plane = 'Airbus A320neo';
+// console.log(plane.includes('A320')); // true
+// console.log(plane.includes('Boeing')); // false
+// console.log(plane.startsWith('Airb')); // true
+
+// if (plane.startsWith('Airbus') && plane.endsWith('neo')) {
+//   console.log('Part of the New Airbus family');
+// }
+
+// Practice exercise
+// const checkBaggage = function (items) {
+//   const baggage = items.toLowerCase();
+//   if (baggage.includes('knife') || baggage.includes('gun')) {
+//     console.log('You are not allowed on board');
+//   } else {
+//     console.log('Welcome aboard');
+//   }
+// };
+
+// checkBaggage('I have a laptop, some Food and a pocket Knife');
+// checkBaggage('Socks and camera');
+
+// -> Working with Strings - Part 3
+
+// console.log('a+very+nice+string'.split('+')); // [ 'a', 'very', 'nice', 'string' ]
+// console.log('Noman Ali'.split(' ')); // [ 'Noman', 'Ali' ]
+// console.log('Noman Ali'.split('')); // [ 'N', 'o', 'm', 'a', 'n', ' ', 'A', 'l', 'i' ]
+
+// const [firstName, lastName] = 'Noman Ali'.split(' ');
+// console.log(firstName, lastName); // Noman Ali
+
+// const fullName = ['Mr.', 'Noman', 'Ali'].join(' '); // Mr. Noman Ali
+// console.log(fullName);
+
+// const capitalizeName = function (name) {
+//   const names = name.split(' ');
+//   const namesUpper = [];
+//   for (const n of names) {
+//     const Capitalize = n[0].toUpperCase() + n.slice(1);
+//     namesUpper.push(Capitalize);
+//   }
+//   return namesUpper.join(' ');
+// };
+
+// console.log(capitalizeName('noman ali'), capitalizeName('ali younas')); // Noman Ali Ali Younas
+
+// Padding
+// const message = 'Go to gate 23!';
+// console.log(message.padStart(25, '+').padEnd(35, '+')); // +++++++Go to gate 23!++++++++
+
+// Credit Card Printing Example
+// const maskCreditCard = function (number) {
+//   const str = number + '';
+//   const last = str.slice(-4);
+//   return last.padStart(str.length, '*');
+// };
+
+// console.log(maskCreditCard(43378463864647384n)); // ************7384
+// console.log(maskCreditCard('43378463864647384')); // ************7384
+
+// Repeat
+// const message2 = 'Bad weather... All Departures Delayed... ';
+// console.log(message2.repeat(5));
+
+// const planesInline = function (n) {
+//   console.log(`There are ${n} planes in line ${'✈'.repeat(n)}`);
+// };
+
+// planesInline(5); // There are 5 planes in line ✈✈✈✈✈
+// planesInline(3); // There are 3 planes in line ✈✈✈
+// planesInline(12); // There are 12 planes in line
 
 // -> Which Data Structure to Use?
 

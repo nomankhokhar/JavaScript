@@ -67,41 +67,158 @@
 
 // -> Higher-Order Functions / Functions Accepting Callback Functions
 
-const oneWord = function (str) {
-  return str.replace(/ /g, '').toLowerCase();
-};
+// const oneWord = function (str) {
+//   return str.replace(/ /g, '').toLowerCase();
+// };
 
-const upperFirstWord = function (str) {
-  const [first, ...others] = str.split(' ');
-  return [first.toUpperCase(), ...others].join(' ');
-};
+// const upperFirstWord = function (str) {
+//   const [first, ...others] = str.split(' ');
+//   return [first.toUpperCase(), ...others].join(' ');
+// };
 
 // Higher-order function
-const transformer = function (str, fn) {
-  console.log(`Original String: ${str}`);
-  console.log(`Transformed String: ${fn(str)}`);
-  console.log(`Transformed by: ${fn.name}`); // Function name property that you can use pass in transformer function
-};
+// const transformer = function (str, fn) {
+//   console.log(`Original String: ${str}`);
+//   console.log(`Transformed String: ${fn(str)}`);
+//   console.log(`Transformed by: ${fn.name}`); // Function name property that you can use pass in transformer function
+// };
 
-transformer('JavaScript is the best!', upperFirstWord);
-transformer('JavaScript is the best!', oneWord);
+// transformer('JavaScript is the best!', upperFirstWord);
+// transformer('JavaScript is the best!', oneWord);
 
-const high5 = function () {
-  console.log('👋');
-};
+// const high5 = function () {
+//   console.log('👋');
+// };
 
-document.body.addEventListener('click', high5);
+// document.body.addEventListener('click', high5);
 
-['Noman', 'Ali', 'Nomi'].forEach(high5);
+// ['Noman', 'Ali', 'Nomi'].forEach(high5);
 
 // -> Functions Returning Functions
 
-const greet = function (greeting) {
-  return function (name) {
-    console.log(`${greeting} ${name}`);
+// const greet = function (greeting) {
+//   return function (name) {
+//     console.log(`${greeting} ${name}`);
+//   };
+// };
+
+// const greeterHey = greet('Hey');
+// greeterHey('Noman');
+// greeterHey('Ali');
+
+// greet('Hello')('Noman');
+
+// -> Challenge
+
+// const greetArrow = greeting => name => console.log(`${greeting} ${name}`);
+
+// greetArrow('Hi')('Noman'); // Hi Noman
+
+// -> The call and apply Methods
+
+const lufthansa = {
+  airline: 'Lufthansa',
+  iataCode: 'LH',
+  bookings: [],
+  book(flightNum, name) {
+    console.log(
+      `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`
+    );
+    this.bookings.push({ flight: `${this.iataCode}${flightNum}`, name });
+  },
+};
+
+lufthansa.book(239, 'Noman Ali');
+lufthansa.book(635, 'John Smith');
+console.log(lufthansa);
+
+const eurowings = {
+  airline: 'Eurowings',
+  iataCode: 'EW',
+  bookings: [],
+};
+
+// Does not work
+// const book = lufthansa.book;
+// book(23, 'Sarah Williams');
+
+// Call: Method Borrowing
+// 1 Argument is the object for this keyword
+// 2 Argument is the arguments that you want to pass into the function
+
+// Apply: Method Borrowing
+// 1 Argument is the object for this keyword
+// 2 Argument is an array of the arguments that you want to pass into the function
+
+// Call Method's
+// const book = lufthansa.book;
+// book.call(eurowings, 23, 'Sarah Williams');
+// console.log(eurowings);
+
+// book.call(lufthansa, 239, 'Mary Cooper');
+// console.log(lufthansa);
+
+const swiss = {
+  airline: 'Swiss Air Lines',
+  iataCode: 'LX',
+  bookings: [],
+};
+
+// book.call(swiss, 583, 'Mary Cooper');
+// console.log(swiss);
+
+// const flightData = [583, 'George Cooper'];
+// book.apply(swiss, flightData);
+// console.log(swiss);
+
+// book.call(swiss, ...flightData);
+
+// -> The bind Method
+
+// Bind Method
+// All three eurowing, lufthanasa swiss in the above code
+
+const book = lufthansa.book;
+const bookEW = book.bind(eurowings);
+const bookLH = book.bind(lufthansa);
+const bookLX = book.bind(swiss);
+
+bookEW(23, 'Steven Williams');
+
+const bookEW23 = book.bind(eurowings, 23);
+bookEW23('Noman Ali');
+bookEW23('Martha Cooper');
+
+// With Event Listeners
+lufthansa.planes = 300;
+lufthansa.buyPlane = function () {
+  console.log(this);
+
+  this.planes++;
+  console.log(this.planes);
+};
+
+document
+  .querySelector('.buy')
+  .addEventListener('click', lufthansa.buyPlane.bind(lufthansa));
+
+// Partial Application
+// const addTax = (rate, value) => value + value * rate;
+// console.log(addTax(0.1, 200));
+
+// const addVAT = addTax.bind(null, 0.23);
+// addVAT = value => value + value * 0.23;
+
+// console.log(addVAT(100));
+// console.log(addVAT(23));
+
+// Challenge Return a function that always add 23% VAT
+const addTaxRate = function (rate) {
+  return function (value) {
+    return value + value * rate;
   };
 };
 
-const greeterHey = greet('Hey');
-greeterHey('Noman');
-greeterHey('Ali');
+const addVAT2 = addTaxRate(0.23); // 23%
+console.log(addVAT2(100));
+console.log(addVAT2(23));

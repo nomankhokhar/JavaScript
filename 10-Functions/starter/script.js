@@ -263,3 +263,79 @@
 // poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] }, 'string');
 
 // -> Immediately Invoked Function Expressions (IIFE)
+
+// Below three are the same
+// (function () {
+//   console.log('This will never run again');
+// })();
+
+// (() => console.log('This will also never run again'))();
+
+// const runOnce = (function () {
+//   console.log('This will never run again');
+// })();
+
+// {
+//   const isPrivate = 23;
+//   var notPrivate = 46;
+// }
+
+// console.log(isPrivate); // Error let and const are block scoped
+// console.log(notPrivate); // 46 because var is function scoped
+
+// -> Closures
+
+// const secureBooking = function () {
+//   let passengerCount = 0;
+
+//   return function () {
+//     passengerCount++;
+//     console.log(`${passengerCount} passengers`);
+//   };
+// };
+
+// const booker = secureBooking();
+// booker();
+// booker();
+// booker();
+
+// -> More Closure Examples
+
+let f;
+const g = function () {
+  const a = 23;
+  f = function () {
+    console.log(a * 2);
+  };
+};
+
+const h = function () {
+  const b = 777;
+  f = function () {
+    console.log(b * 2);
+  };
+};
+
+g();
+f();
+
+h();
+f();
+
+console.dir(f);
+
+// Below is the closure example because setTimeout run after the function is done
+
+const boardPassengers = function (n, wait) {
+  const perGroup = n / 3;
+
+  setTimeout(function () {
+    console.log(`We are now boarding all ${n} passengers`);
+    console.log(`There are 3 groups, each with ${perGroup} passengers`);
+  }, wait * 1000);
+
+  console.log(`Will start boarding in ${wait} seconds`);
+};
+
+const perGroup = 1000;
+boardPassengers(180, 3);

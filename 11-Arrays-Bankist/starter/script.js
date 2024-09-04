@@ -70,6 +70,8 @@ const currencies = new Map([
   ['GBP', 'Pound sterling'],
 ]);
 
+// -> Creating DOM Elements
+
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 const displayMovements = function (movements) {
@@ -90,6 +92,79 @@ const displayMovements = function (movements) {
 };
 
 displayMovements(account1.movements);
+
+// -> Computing Usernames
+
+const user = 'Steven Thomas William'; // stw
+
+const createUsernames = function (accs) {
+  accs.forEach(function (acc) {
+    acc.username = acc.owner
+      .split(' ')
+      .map(name => name[0])
+      .join('')
+      .toLowerCase();
+  });
+};
+
+createUsernames(accounts);
+
+// -> The filter Method
+
+const deposits = movements.filter(function (mov) {
+  return mov > 0;
+});
+
+const depositsFor = [];
+for (const mov of movements) {
+  if (mov > 0) {
+    depositsFor.push(mov);
+  }
+}
+
+const withdrawals = movements.filter(function (mov) {
+  return mov < 0;
+});
+
+// -> The reduce Method
+
+const calcDisplayBalance = function (movements) {
+  const balance = movements.reduce(function (acc, cur) {
+    return acc + cur;
+  }, 0);
+
+  labelBalance.textContent = `${balance}€`;
+};
+
+calcDisplayBalance(account1.movements);
+
+// -> The Magic of Chaining Methods 2
+
+const calcDisplaySummary = function (movements) {
+  const incomes = movements
+    .filter(mov => mov > 0)
+    .reduce((acc, mov) => acc + mov, 0);
+
+  labelSumIn.textContent = `${incomes}€`;
+
+  const out = movements
+    .filter(mov => mov < 0)
+    .reduce((acc, mov) => acc + mov, 0);
+
+  labelSumOut.textContent = `${Math.abs(out)}€`;
+
+  const interest = movements
+    .filter(mov => mov > 0)
+    .map(deposit => (deposit * 1.2) / 100)
+    .filter(int => {
+      return int >= 1;
+    })
+    .reduce((acc, int) => acc + int, 0);
+
+  labelSumInterest.textContent = `${interest}€`;
+};
+
+calcDisplaySummary(account1.movements);
 
 /////////////////////////////////////////////////
 
@@ -179,4 +254,48 @@ displayMovements(account1.movements);
 //   console.log(`${value}: ${(value, _)}`);
 // });
 
-// -> Project: Bankist App
+// -> Data transformations Map , Filter , and Reduces
+
+// map(), filter(), and reduce() do not mutate the original array
+// sort() , reverse() , and splice() mutate the original array
+
+// -> The map Method
+
+// const eurToUsd = 1.1;
+
+// const movementUSD = movements.map(function (mov, index) {
+//   return mov * eurToUsd;
+// });
+
+// console.log(movements); // do not mutate the original array
+// console.log(movementUSD); // return new array instead
+
+// const movementUSDfor = [];
+
+// for (const mov of movements) {
+//   movementUSDfor.push(mov * eurToUsd);
+// }
+
+// console.log(movementUSDfor);
+
+// // callback function into arrow function challenge
+// const movementUSDarrow = movements.map(mov => mov * eurToUsd);
+// console.log(movementUSDarrow);
+
+// const movementDescription = movements.map((mov, i) =>
+//   `Movement ${i + 1}: You ${
+//     mov > 0 ? 'deposited' : 'withdrew'
+//   } ${Math.abs(mov)}`;
+// );
+
+// console.log(movementDescription);
+
+// -> The Magic of Chaining Methods 1
+
+// const eurToUsd = 1.1;
+// const totalDepositsUSD = movements
+//   .filter(mov => mov > 0)
+//   .map(mov => mov * eurToUsd)
+//   .reduce((acc, mov) => acc + mov, 0);
+
+// console.log(totalDepositsUSD);

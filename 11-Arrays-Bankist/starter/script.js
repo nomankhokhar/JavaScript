@@ -75,6 +75,8 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
 
+// -> Simple Array Methods
+
 // let arr = ['a', 'b', 'c', 'd', 'e'];
 
 // SLICE METHOD returns a new array
@@ -109,8 +111,52 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 // -> The New at Methods
 
-const arr = [23, 11, 4];
-console.log(arr[0]);
-console.log(arr.at(-1)); // 4
-console.log(arr.at(0)); // 23
-console.log(arr.at(1)); // 11
+// const arr = [23, 11, 4];
+// console.log(arr[0]); // 23
+// console.log(arr.at(0)); // 23
+
+// Getting the last element of an array
+// console.log(arr[arr.length - 1]); // 4s
+// console.log(arr.slice(-1)[0]); // 4
+// console.log(arr.slice(-1).pop()); // 4
+
+// Getting the first element of an array
+// console.log(arr[0]); // 23
+// console.log(arr.slice(0, 1)[0]); // 23
+
+// -> Looping Arrays: forEach
+
+// for-of loop
+// for (const [i, movement] of movements.entries()) {
+//   if (movement > 0) {
+//     console.log(`You ${i + 1} deposited ${movement}`);
+//   } else {
+//     console.log(`You ${i + 1} withdrew ${Math.abs(movement)}`);
+//   }
+// }
+
+// console.log('--- forEach ---');
+
+// forEach method break does not work in forEach loop
+// movements.forEach(function (movement, index) {
+//   if (movement > 0) {
+//     console.log(`You ${index + 1} deposited ${movement}`);
+//   } else {
+//     console.log(`You ${index + 1} withdrew ${Math.abs(movement)}`);
+//   }
+// });
+
+// -> forEach With Maps and Sets
+
+// Map also has a forEach method
+// currencies.forEach(function (value, key) {
+//   console.log(`${key}: ${value}`);
+// });
+
+// Set has a forEach methods does not have indexes
+// const currentSet = new Set(['USD', 'EUR', 'USD', 'GBP']);
+// console.log(currentSet);
+
+// currentSet.forEach(function (value, _, set) {
+//   console.log(`${value}: ${(value, _)}`);
+// });

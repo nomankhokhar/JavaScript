@@ -74,3 +74,43 @@ const currencies = new Map([
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
+
+// let arr = ['a', 'b', 'c', 'd', 'e'];
+
+// SLICE METHOD returns a new array
+// console.log(arr.slice(2)); // ['c', 'd', 'e']
+// console.log(arr.slice(2, 4)); // ['c', 'd']
+// console.log(arr.slice(-2)); // ['d', 'e']
+// console.log(arr.slice(-1)); // ['e']
+// console.log(arr.slice(1, -2)); // ['b', 'c']
+// console.log(arr.slice()); // ['a', 'b', 'c', 'd', 'e']
+// console.log([...arr]); // ['a', 'b', 'c', 'd', 'e']
+
+// SPLICE METHOD mutates the original array
+// console.log(arr.splice(2)); // ['c', 'd', 'e']
+// console.log(arr); // ['a', 'b']
+// console.log(arr.splice(-1)); // ['b']
+// console.log(arr); // ['a']
+// console.log(arr.splice(1, 2)); // ['b', 'c']
+// console.log(arr); // ['a', 'd']
+
+// REVERSE METHOD mutates the original array
+// const arr2 = ['j', 'i', 'h', 'g', 'f'];
+// console.log(arr2.reverse()); // ['f', 'g', 'h', 'i', 'j']
+// console.log(arr2); // ['f', 'g', 'h', 'i', 'j']
+
+// CONCAT METHOD does not mutate the original array
+// const letters = arr.concat(arr2);
+// console.log(letters); // ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
+// console.log([...arr, ...arr2]); // ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
+
+// JOIN METHOD
+// console.log(letters.join(' - ')); // a - b - c - d - e - f - g - h - i - j
+
+// -> The New at Methods
+
+const arr = [23, 11, 4];
+console.log(arr[0]);
+console.log(arr.at(-1)); // 4
+console.log(arr.at(0)); // 23
+console.log(arr.at(1)); // 11

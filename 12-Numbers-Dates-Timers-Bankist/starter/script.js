@@ -251,3 +251,7 @@ btnSort.addEventListener('click', function (e) {
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
+
+// ->  Converting and Checking Numbers
+
+console.log(23 === 23.0); // true

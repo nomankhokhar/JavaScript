@@ -458,3 +458,27 @@ btnSort.addEventListener('click', function (e) {
 
 // const account = accounts.find(acc => acc.owner === 'Jessica Davis');
 // console.log(account);
+
+// -> More ways of creating and filling arrays
+
+// console.log(new Array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+// console.log(new Array(7)); // [empty x 7] length is 7
+// console.log(new Array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+
+// fill method mutates the original array
+// const x = new Array(7).fill(1);
+// console.log(x);
+
+// -> Summary Arrays: reduce
+
+// Mutate the original array
+// push, pop, shift, unshift, splice, sort, reverse, fill
+
+// Do not mutate the original array
+// concat, slice, join , map, filter, reduce, flat, flatMap
+
+// An array index
+// indexOf, includes, find, findIndex
+
+// Know if array includes
+// some, every, includes, join

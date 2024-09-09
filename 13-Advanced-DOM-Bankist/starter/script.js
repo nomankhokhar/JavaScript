@@ -140,3 +140,4 @@ logo.className = 'Noman Ali';
 logo.className = 'noman-ali';
 
 // -> Implementing Smooth Scrolling
+// -> Types of Events and Event Handlers

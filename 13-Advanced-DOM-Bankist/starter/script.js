@@ -102,7 +102,7 @@ message.style.width = '120%';
 message.style.height =
   Number.parseFloat(getComputedStyle(message).height, 10) + 30 + 'px';
 
-document.documentElement.style.setProperty('--color-primary', 'orangered');
+// document.documentElement.style.setProperty('--color-primary', 'orangered');
 
 // Attributes
 // const logo = document.querySelector('.nav__logo');
@@ -262,22 +262,22 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
 
 // -> DOM Traversing
 
-const h1 = document.querySelector('h1');
+// const h1 = document.querySelector('h1');
 
 // Going downwards: child
 // Inside h1 element we have 4 elements with class of highlight
 // console.log(h1.querySelectorAll('.highlight'));
 // console.log(h1.childNodes);
 // console.log(h1.children);
-h1.firstElementChild.style.color = 'white';
-h1.lastElementChild.style.color = 'orangered';
+// h1.firstElementChild.style.color = 'white';
+// h1.lastElementChild.style.color = 'orangered';
 
 // Going upwards: parents
 // console.log(h1.parentNode);
 // console.log(h1.parentElement);
 
 // Closest parent element
-h1.closest('.header').style.background = 'var(--gradient-secondary)';
+// h1.closest('.header').style.background = 'var(--gradient-secondary)';
 
 // Going sideways: siblings
 // console.log(h1.previousElementSibling);
@@ -286,9 +286,9 @@ h1.closest('.header').style.background = 'var(--gradient-secondary)';
 // All siblings
 // console.log(h1.parentElement.children);
 
-[...h1.parentElement.children].forEach(function (el) {
-  if (el !== h1) el.style.transform = 'scale(0.5)';
-});
+// [...h1.parentElement.children].forEach(function (el) {
+//   if (el !== h1) el.style.transform = 'scale(0.5)';
+// });
 
 // -> Building a Tabbed Components
 
@@ -338,3 +338,14 @@ const handleHover = function (e, opacity) {
 nav.addEventListener('mouseover', handleHover.bind(0.5));
 
 nav.addEventListener('mouseout', handleHover.bind(1));
+
+// -> Implementing a Sticky Navigation: The Scroll Event
+
+const initialCoords = section1.getBoundingClientRect();
+
+window.addEventListener('scroll', function () {
+  if (window.scrollY > initialCoords.top) nav.classList.add('sticky');
+  else nav.classList.remove('sticky');
+});
+
+// -> A Better Way: The Intersection Observer API

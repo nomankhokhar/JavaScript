@@ -93,11 +93,11 @@ document
 message.style.backgroundColor = '#37383d';
 message.style.width = '120%';
 
-console.log(message.style.height); // Empty string
-console.log(message.style.backgroundColor); // rgb(55, 56, 61)
+// console.log(message.style.height); // Empty string
+// console.log(message.style.backgroundColor); // rgb(55, 56, 61)
 
-console.log(getComputedStyle(message).color); // rgb(255, 255, 255)
-console.log(getComputedStyle(message).height); // 32px
+// console.log(getComputedStyle(message).color); // rgb(255, 255, 255)
+// console.log(getComputedStyle(message).height); // 32px
 
 message.style.height =
   Number.parseFloat(getComputedStyle(message).height, 10) + 30 + 'px';
@@ -105,23 +105,23 @@ message.style.height =
 document.documentElement.style.setProperty('--color-primary', 'orangered');
 
 // Attributes
-const logo = document.querySelector('.nav__logo');
+// const logo = document.querySelector('.nav__logo');
 // console.log(logo.alt); // Bankist logo
 // console.log(logo.src); // http:// absolute path
 // console.log(logo.className); // nav__logo
 
-logo.alt = 'Beautiful minimalist logo';
+// logo.alt = 'Beautiful minimalist logo';
 
 // Non-standard
 // console.log(logo.designer); // undefined
 // console.log(logo.getAttribute('designer')); // Null
 
-logo.setAttribute('company', 'Bankist'); // Add new attribute like company="Bankist"
+// logo.setAttribute('company', 'Bankist'); // Add new attribute like company="Bankist"
 
 // console.log(logo.src);
 // console.log(logo.getAttribute('src')); // img/logo.png -> Relative path
 
-const link = document.querySelector('.nav__link--btn');
+// const link = document.querySelector('.nav__link--btn');
 
 // console.log(link.href);
 // console.log(link.getAttribute('href'));
@@ -130,14 +130,14 @@ const link = document.querySelector('.nav__link--btn');
 // console.log(logo.dataset.versionNumber); // 3.0
 
 // Classes
-logo.classList.add('c', 'j');
-logo.classList.remove('c', 'j');
-logo.classList.toggle('c');
-logo.classList.contains('c'); // Not includes
+// logo.classList.add('c', 'j');
+// logo.classList.remove('c', 'j');
+// logo.classList.toggle('c');
+// logo.classList.contains('c'); // Not includes
 
 // Don't use it because it will override all existing classes
-logo.className = 'Noman Ali';
-logo.className = 'noman-ali';
+// logo.className = 'Noman Ali';
+// logo.className = 'noman-ali';
 
 // -> Implementing Smooth Scrolling
 
@@ -145,7 +145,7 @@ const btnScrollTo = document.querySelector('.btn--scroll-to');
 const section1 = document.querySelector('#section--1');
 
 btnScrollTo.addEventListener('click', function (e) {
-  const s1coords = section1.getBoundingClientRect();
+  // const s1coords = section1.getBoundingClientRect();
 
   // console.log(s1coords);
 
@@ -184,20 +184,20 @@ btnScrollTo.addEventListener('click', function (e) {
 
 // -> Types of Events and Event Handlers
 
-const h1 = document.querySelector('h1');
-const alertH1 = function (e) {
-  alert('addEventListener: Great! You are reading the heading :D');
-};
+// const h1 = document.querySelector('h1');
+// const alertH1 = function (e) {
+//   alert('addEventListener: Great! You are reading the heading :D');
+// };
 
 // Newer way
-h1.addEventListener('mouseenter', alertH1);
+// h1.addEventListener('mouseenter', alertH1);
 
 // Older Way
 // h1.onmouseenter = function (e) {
 //   alert('onmouseenter: Great! You are reading the heading :D');
 // };
 
-setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
+// setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
 
 // -> Event Propagation Bubbling an Capturing
 
@@ -209,33 +209,107 @@ setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
 // -> Event Propagation in Practice
 
 // rgb(255, 255, 255)
-const randomInt = (min, max) => {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-};
+// const randomInt = (min, max) => {
+//   return Math.floor(Math.random() * (max - min + 1) + min);
+// };
 
-const randomColor = () => {
-  return `rgb(${randomInt(0, 255)},${randomInt(0, 255)},${randomInt(0, 255)})`;
-};
+// const randomColor = () => {
+//   return `rgb(${randomInt(0, 255)},${randomInt(0, 255)},${randomInt(0, 255)})`;
+// };
 
-document.querySelector('.nav__link').addEventListener('click', function (e) {
-  this.style.backgroundColor = randomColor();
-  console.log('LINK', e.target, e.currentTarget);
-  console.log(e.currentTarget === this);
-  // Stop Propagation
-  e.stopPropagation();
-});
+// document.querySelector('.nav__link').addEventListener('click', function (e) {
+//   this.style.backgroundColor = randomColor();
+//   console.log('LINK', e.target, e.currentTarget);
+//   console.log(e.currentTarget === this);
+//   // Stop Propagation
+//   e.stopPropagation();
+// });
 
-document.querySelector('.nav__links').addEventListener('click', function (e) {
-  this.style.backgroundColor = randomColor();
-  console.log('CONTAINER', e.target, e.currentTarget);
-});
+// document.querySelector('.nav__links').addEventListener('click', function (e) {
+//   this.style.backgroundColor = randomColor();
+//   console.log('CONTAINER', e.target, e.currentTarget);
+// });
 
-document.querySelector('.nav').addEventListener('click', function (e) {
-  this.style.backgroundColor = randomColor();
-  console.log('NAV', e.target, e.currentTarget);
-});
+// document.querySelector('.nav').addEventListener('click', function (e) {
+//   this.style.backgroundColor = randomColor();
+//   console.log('NAV', e.target, e.currentTarget);
+// });
 
 // -> Event Delegation: Implementing Page Navigation
 
+// Older way and not efficient
+// document.querySelectorAll('.nav__links').forEach(el =>
+//   el.addEventListener('click', function (e) {
+//     e.preventDefault();
+//     if (e.target.classList.contains('nav__link')) {
+//       const id = e.target.getAttribute('href');
+//       document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+//     }
+//   })
+// );
+
 // 1. Add event listener to common parent element
 // 2. Determine what element originated the event
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  e.preventDefault();
+
+  // Matching Strategy -> Find the closet parent element
+  if (e.target.classList.contains('nav__link')) {
+    const id = e.target.getAttribute('href');
+    document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+  }
+});
+
+// -> DOM Traversing
+
+const h1 = document.querySelector('h1');
+
+// Going downwards: child
+// Inside h1 element we have 4 elements with class of highlight
+console.log(h1.querySelectorAll('.highlight'));
+console.log(h1.childNodes);
+console.log(h1.children);
+h1.firstElementChild.style.color = 'white';
+h1.lastElementChild.style.color = 'orangered';
+
+// Going upwards: parents
+console.log(h1.parentNode);
+console.log(h1.parentElement);
+
+// Closest parent element
+h1.closest('.header').style.background = 'var(--gradient-secondary)';
+
+// Going sideways: siblings
+console.log(h1.previousElementSibling);
+console.log(h1.nextElementSibling);
+
+// All siblings
+console.log(h1.parentElement.children);
+
+[...h1.parentElement.children].forEach(function (el) {
+  if (el !== h1) el.style.transform = 'scale(0.5)';
+});
+
+// -> Building a Tabbed Components
+
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelectorAll('.operations__content');
+
+tabsContainer.addEventListener('click', function (e) {
+  const clicked = e.target.closest('.operations__tab');
+
+  if (!clicked) return;
+
+  // Remove active classes
+  tabs.forEach(t => t.classList.remove('operations__tab--active'));
+  tabsContent.forEach(c => c.classList.remove('operations__content--active'));
+
+  // Add active class
+  clicked.classList.add('operations__tab--active');
+
+  // Activate content area
+  document
+    .querySelector(`.operations__content--${clicked.dataset.tab}`)
+    .classList.add('operations__content--active');
+});

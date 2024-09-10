@@ -140,4 +140,102 @@ logo.className = 'Noman Ali';
 logo.className = 'noman-ali';
 
 // -> Implementing Smooth Scrolling
+
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+btnScrollTo.addEventListener('click', function (e) {
+  const s1coords = section1.getBoundingClientRect();
+
+  // console.log(s1coords);
+
+  // console.log(e.target.getBoundingClientRect());
+
+  // console.log('Current Scroll (X/Y)', window.pageXOffset, window.pageYOffset);
+
+  // console.log(
+  //   'Height/Width Viewport',
+  //   document.documentElement.clientHeight,
+  //   document.documentElement.clientWidth
+  // );
+
+  // console.log(
+  //   'Scroll Height/Width',
+  //   document.documentElement.scrollHeight,
+  //   document.documentElement.scrollWidth
+  // );
+
+  // Scrolling
+  // window.scrollTo(
+  //   s1coords.left + window.pageXOffset,
+  //   s1coords.top + window.pageYOffset
+  // );
+
+  // Old way
+  // window.scrollTo({
+  //   left: s1coords.left + window.pageXOffset,
+  //   top: s1coords.top + window.pageYOffset,
+  //   behavior: 'smooth',
+  // });
+
+  // Modern way
+  section1.scrollIntoView({ behavior: 'smooth' });
+});
+
 // -> Types of Events and Event Handlers
+
+const h1 = document.querySelector('h1');
+const alertH1 = function (e) {
+  alert('addEventListener: Great! You are reading the heading :D');
+};
+
+// Newer way
+h1.addEventListener('mouseenter', alertH1);
+
+// Older Way
+// h1.onmouseenter = function (e) {
+//   alert('onmouseenter: Great! You are reading the heading :D');
+// };
+
+setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
+
+// -> Event Propagation Bubbling an Capturing
+
+// First Capturing Phase Start then Bubbling Phase Start
+// Capturing: Event starts at the root element and goes down to the target element
+
+// Bubble: Event starts at the target element and bubbles up to the root element
+
+// -> Event Propagation in Practice
+
+// rgb(255, 255, 255)
+const randomInt = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+};
+
+const randomColor = () => {
+  return `rgb(${randomInt(0, 255)},${randomInt(0, 255)},${randomInt(0, 255)})`;
+};
+
+document.querySelector('.nav__link').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('LINK', e.target, e.currentTarget);
+  console.log(e.currentTarget === this);
+  // Stop Propagation
+  e.stopPropagation();
+});
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('CONTAINER', e.target, e.currentTarget);
+});
+
+document.querySelector('.nav').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('NAV', e.target, e.currentTarget);
+});
+
+// -> Event Delegation: Implementing Page Navigation
+
+// 1. Add event listener to common parent element
+// 2. Determine what element originated the event

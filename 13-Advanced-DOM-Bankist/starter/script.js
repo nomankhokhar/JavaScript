@@ -49,7 +49,7 @@ document.addEventListener('keydown', function (e) {
 // console.log(document.querySelector('.header')); // <header class="header">...</header>
 
 const header = document.querySelector('.header');
-const allSections = document.querySelectorAll('.section');
+// const allSections = document.querySelectorAll('.section');
 // console.log(allSections); // All Node list
 
 document.getElementById('section--1');
@@ -349,3 +349,84 @@ window.addEventListener('scroll', function () {
 });
 
 // -> A Better Way: The Intersection Observer API
+
+// const obsCallback = function (entries, observer) {
+//   entries.forEach(entry => {
+//     console.log(entry);
+//   });
+// };
+
+// const obsOptions = {
+//   root: null,
+//   threshold: [0, 0.2],
+// };
+
+// const observer = new IntersectionObserver(obsCallback, obsOptions);
+
+// observer.observe(section1);
+
+const headerObserver = new IntersectionObserver(
+  function (entries, observer) {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) nav.classList.add('sticky');
+      else nav.classList.remove('sticky');
+    });
+  },
+  {
+    root: null,
+    threshold: 1, // 100% of the target element is visible
+    rootMargin: `-${nav.getBoundingClientRect().height}px`,
+  }
+);
+
+headerObserver.observe(header);
+
+// -> Revealing Elements on Scroll
+
+const allSections = document.querySelectorAll('.section');
+
+const sectionObserver = new IntersectionObserver(
+  function (entries, observer) {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.remove('section--hidden');
+      observer.unobserve(entry.target); // Stop observing the target element when observer is intersecting
+    });
+  },
+  {
+    root: null,
+    threshold: 0.15,
+  }
+);
+
+allSections.forEach(function (section) {
+  sectionObserver.observe(section);
+  section.classList.add('section--hidden');
+});
+
+// -> Lazy Loading Images
+
+const imgTargets = document.querySelectorAll('img[data-src]');
+
+const loadImg = function (entries, observer) {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+
+    // Replace src with data-src
+    entry.target.src = entry.target.dataset.src;
+
+    entry.target.addEventListener('load', function () {
+      entry.target.classList.remove('lazy-img');
+    });
+
+    observer.unobserve(entry.target);
+  });
+};
+
+const imgObserver = new IntersectionObserver(loadImg, {
+  root: null,
+  threshold: 0,
+  rootMargin: '-200px',
+});
+
+imgTargets.forEach(img => imgObserver.observe(img));

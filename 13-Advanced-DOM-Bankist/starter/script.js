@@ -65,8 +65,8 @@ const allButtons = document.getElementsByTagName('button');
 
 const message = document.createElement('div');
 message.classList.add('cookie-message');
-message.textContent =
-  'We use cookies for improved functionality and analytics.';
+// message.textContent =
+//   'We use cookies for improved functionality and analytics.';
 message.innerHTML =
   'We use cookies for improved functionality and analytics. <button class="btn btn--close-cookie">Got it!</button>';
 
@@ -531,8 +531,16 @@ window.addEventListener('load', function (e) {
   console.log('Page fully loaded', e);
 });
 
-window.addEventListener('beforeunload', function (e) {
-  e.preventDefault();
-  console.log(e);
-  e.returnValue = '';
-});
+// window.addEventListener('beforeunload', function (e) {
+//   e.preventDefault();
+//   console.log(e);
+//   e.returnValue = '';
+// });
+
+// -> Efficient Script Loading: defer and async
+
+// defer -> Load the script after the HTML is parsed
+// <script src="script.js" defer></script>
+
+//  async -> Load the script asynchronously with html parsing
+// <script src="script.js" async></script>

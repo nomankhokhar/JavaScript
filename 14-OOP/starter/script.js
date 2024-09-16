@@ -201,7 +201,7 @@ const noman = new PersonCl('Noman Ali', 2002);
 //   console.log(`Hey ${this.firstName}`);
 // };
 
-noman.greet();
+// noman.greet();
 
 // 1. Classes are NOT hoisted
 // 2. Classes are first-class citizens
@@ -223,7 +223,7 @@ const account = {
   },
 };
 
-console.log(account.latest);
+// console.log(account.latest);
 
 account.latest = 50;
 
@@ -263,11 +263,73 @@ class PersonCl2 {
 }
 
 const noman2 = new PersonCl2('Noman Ali', 2002);
-console.log(noman2.age);
+// console.log(noman2.age);
 noman2.calcAge();
 
-noman2.hey();
+// PersonCl2.hey();
+
 noman2.fullName = 'Noman Ali';
-console.log(noman2.fullName);
+// console.log(noman2.fullName);
 
 const walter = new PersonCl2('Walter xD', 1965);
+
+// -> Object.create()
+
+const PersonProto = {
+  calcAge() {
+    console.log(2021 - this.birthYear);
+  },
+  // this look like a constructor function but it is not a constructor function.
+  init(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  },
+};
+
+// Object.create() is used to create a new object with a specified prototype object and properties that are passed as an argument.
+const steven = Object.create(PersonProto);
+console.log(steven);
+steven.name = 'Steven';
+steven.birthYear = 2002;
+steven.calcAge();
+
+const sarah = Object.create(PersonProto);
+sarah.init('Sarah', 1997);
+sarah.calcAge();
+
+// Coding Challenge #2
+
+class CarCl {
+  constructor(make, speed) {
+    this.make = make;
+    this.speed = speed;
+  }
+
+  accelerate() {
+    this.speed += 10;
+    console.log(`${this.make} is going at ${this.speed} km/h`);
+  }
+
+  brake() {
+    this.brake -= 5;
+    console.log(`${this.make} is going at ${this.speed} km/h`);
+  }
+
+  get speedUS() {
+    return this.speed / 1.6;
+  }
+
+  set speedUS(speed) {
+    this.speed = speed * 1.6;
+  }
+}
+
+const ford = new CarCl('Ford', 120);
+console.log(ford.speedUS);
+ford.accelerate();
+ford.accelerate();
+ford.brake();
+
+ford.speedUS = 50;
+
+console.log(ford);

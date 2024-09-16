@@ -484,18 +484,160 @@
 
 // console.log(steven);
 
+// -> Another Class Example
+
 // -> Encapsulation: Protected Properties and Methods
 
 // Encapsulation is a way to protect the data inside an object from the outside world.
 
 class Account {
+  // Public fields (instances)
+  locale = navigator.language;
+
+  // Private fields (instances)
+  #movements = [];
+  #pin;
+
   constructor(owner, currency, pin) {
     this.owner = owner;
     this.currency = currency;
-    this._pin = pin;
-    this._movements = [];
+    this.#pin = pin;
     this.locale = navigator.language;
 
     console.log(`Thanks for opening an account, ${owner}`);
   }
+
+  // Public Interface
+
+  getMovements() {
+    return this.#movements;
+  }
+
+  deposit(val) {
+    this.#movements.push(val);
+    return this;
+  }
+
+  withdraw(val) {
+    this.deposit(-val);
+    return this;
+  }
+
+  requestLoan(val) {
+    if (this.#approveLoan(val)) {
+      this.deposit(val);
+      console.log(`Loan approved`);
+      return this;
+    }
+  }
+
+  static helper() {
+    console.log('Helper');
+  }
+
+  // Private Methods
+
+  #approveLoan(val) {
+    return true;
+  }
 }
+
+// const acc1 = new Account('Noman', 'PKR', 1111);
+// console.log(acc1);
+
+// console.log(acc1.getMovements());
+
+// acc1.deposit(250);
+// acc1.withdraw(140);
+// console.log(acc1);
+
+// acc1.helper(); // Not available on instances
+
+// Account.helper(); // Available on class
+
+// -> Chaining Methods
+
+// acc1.deposit(300).deposit(500).withdraw(35).requestLoan(2500).withdraw(4000);
+// console.log(acc1.getMovements());
+
+// -> GPT Generated Code Classes
+
+class Course {
+  // Public property
+  courseName;
+
+  // Private property (using # syntax)
+  #courseFee;
+
+  constructor(courseName, courseFee) {
+    this.courseName = courseName;
+    this.#courseFee = courseFee; // Private property, not accessible outside the class
+  }
+
+  // Public method
+  getCourseDetails() {
+    return `Course Name: ${this.courseName}`;
+  }
+
+  // Protected method (simulated by convention, using _ to indicate it's "protected")
+  _calculateFeeDiscount(discountPercentage) {
+    return this.#courseFee - (this.#courseFee * discountPercentage) / 100;
+  }
+
+  // Public method to get fee (accesses protected method)
+  getDiscountedFee(discountPercentage) {
+    return this._calculateFeeDiscount(discountPercentage);
+  }
+}
+
+class Student extends Course {
+  // Public property
+  studentName;
+
+  // Private property
+  #studentID;
+
+  constructor(studentName, studentID, courseName, courseFee) {
+    // Call parent class (Course) constructor
+    super(courseName, courseFee);
+
+    this.studentName = studentName;
+    this.#studentID = studentID;
+  }
+
+  // Public method
+  introduce() {
+    console.log(`I am ${this.studentName}, studying ${this.courseName}.`);
+  }
+
+  // Overriding (polymorphism) public method from Course
+  getCourseDetails() {
+    return `Student: ${this.studentName} is enrolled in the course: ${this.courseName}`;
+  }
+
+  // Private method (only accessible within this class)
+  #generateStudentID() {
+    return `${this.studentName}-${Math.random().toString(36).substr(2, 9)}`;
+  }
+
+  // Public method accessing private method
+  getStudentID() {
+    return this.#studentID ? this.#studentID : this.#generateStudentID();
+  }
+
+  // Access protected method from parent
+  getFinalFeeWithDiscount(discountPercentage) {
+    return this.getDiscountedFee(discountPercentage); // Accessing protected method from Course
+  }
+}
+
+// Usage Example
+const course = new Course('Computer Science', 5000);
+console.log(course.getCourseDetails()); // Public method
+console.log(course.getDiscountedFee(10)); // Public method accessing protected
+
+const student = new Student('John Doe', null, 'Computer Science', 5000);
+student.introduce(); // Public method
+console.log(student.getCourseDetails()); // Polymorphism: overridden method from Course class
+console.log(student.getStudentID()); // Public method accessing private method
+console.log(student.getFinalFeeWithDiscount(20)); // Accessing protected method from parent

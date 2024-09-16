@@ -175,23 +175,23 @@
 
 // -> ES6 Classes
 
-class PersonCl {
-  constructor(firstName, birthYear) {
-    this.firstName = firstName;
-    this.birthYear = birthYear;
-  }
+// class PersonCl {
+//   constructor(firstName, birthYear) {
+//     this.firstName = firstName;
+//     this.birthYear = birthYear;
+//   }
 
-  calcAge() {
-    console.log(2021 - this.birthYear);
-  }
+//   calcAge() {
+//     console.log(2021 - this.birthYear);
+//   }
 
-  greet() {
-    console.log(`Hey ${this.firstName}`);
-  }
-}
+//   greet() {
+//     console.log(`Hey ${this.firstName}`);
+//   }
+// }
 
 // new keyword is used to  called constructor function in PersonCl class.
-const noman = new PersonCl('Noman Ali', 2002);
+// const noman = new PersonCl('Noman Ali', 2002);
 // console.log(noman);
 // noman.calcAge();
 
@@ -210,126 +210,292 @@ const noman = new PersonCl('Noman Ali', 2002);
 // -> Getters and Setters and Static Methods
 
 // Getters are used to get the properties of an object.
-const account = {
-  owner: 'Noman Ali',
-  movements: [100, 200, 300, 400],
+// const account = {
+//   owner: 'Noman Ali',
+//   movements: [100, 200, 300, 400],
 
-  get latest() {
-    return this.movements.slice(-1).pop();
-  },
+//   get latest() {
+//     return this.movements.slice(-1).pop();
+//   },
 
-  set latest(mov) {
-    this.movements.push(mov);
-  },
-};
+//   set latest(mov) {
+//     this.movements.push(mov);
+//   },
+// };
 
 // console.log(account.latest);
 
-account.latest = 50;
+// account.latest = 50;
 
-class PersonCl2 {
-  constructor(fullName, birthYear) {
-    this.fullName = fullName;
-    this.birthYear = birthYear;
-  }
-  // Methods will be added to .prototype property are called instance methods.
-  calcAge() {
-    console.log(2021 - this.birthYear);
-  }
+// class PersonCl2 {
+// constructor(fullName, birthYear) {
+//   this.fullName = fullName;
+//   this.birthYear = birthYear;
+// }
+// Methods will be added to .prototype property are called instance methods.
+// calcAge() {
+//   console.log(2021 - this.birthYear);
+// }
 
-  greet() {
-    console.log(`Hey ${this.firstName}`);
-  }
+// greet() {
+//   console.log(`Hey ${this.firstName}`);
+// }
 
-  get age() {
-    return 2021 - this.birthYear;
-  }
+// get age() {
+//   return 2021 - this.birthYear;
+// }
 
-  // Set a property that already exists
-  set fullName(name) {
-    if (name.includes(' ')) this._fullName = name;
-    else alert(`${name} is not a full name!`);
-  }
+// Set a property that already exists
+// set fullName(name) {
+//   if (name.includes(' ')) this._fullName = name;
+//   else alert(`${name} is not a full name!`);
+// }
 
-  get fullName() {
-    return this._fullName;
-  }
+// get fullName() {
+//   return this._fullName;
+// }
 
-  // Static Method
-  static hey() {
-    console.log('Hey there ');
-    console.log(this);
-  }
-}
+// Static Method
+// static hey() {
+//   console.log('Hey there ');
+//   console.log(this);
+// }
+// }
 
-const noman2 = new PersonCl2('Noman Ali', 2002);
+// const noman2 = new PersonCl2('Noman Ali', 2002);
 // console.log(noman2.age);
-noman2.calcAge();
+// noman2.calcAge();
 
 // PersonCl2.hey();
 
-noman2.fullName = 'Noman Ali';
+// noman2.fullName = 'Noman Ali';
 // console.log(noman2.fullName);
 
-const walter = new PersonCl2('Walter xD', 1965);
+// const walter = new PersonCl2('Walter xD', 1965);
 
 // -> Object.create()
 
-const PersonProto = {
-  calcAge() {
-    console.log(2021 - this.birthYear);
-  },
-  // this look like a constructor function but it is not a constructor function.
-  init(firstName, birthYear) {
-    this.firstName = firstName;
-    this.birthYear = birthYear;
-  },
-};
+// const PersonProto = {
+//   calcAge() {
+//     console.log(2021 - this.birthYear);
+//   },
+//   // this look like a constructor function but it is not a constructor function.
+//   init(firstName, birthYear) {
+//     this.firstName = firstName;
+//     this.birthYear = birthYear;
+//   },
+// };
 
 // Object.create() is used to create a new object with a specified prototype object and properties that are passed as an argument.
-const steven = Object.create(PersonProto);
-console.log(steven);
-steven.name = 'Steven';
-steven.birthYear = 2002;
-steven.calcAge();
+// const steven = Object.create(PersonProto);
+// console.log(steven);
+// steven.name = 'Steven';
+// steven.birthYear = 2002;
+// steven.calcAge();
 
-const sarah = Object.create(PersonProto);
-sarah.init('Sarah', 1997);
-sarah.calcAge();
+// const sarah = Object.create(PersonProto);
+// sarah.init('Sarah', 1997);
+// sarah.calcAge();
 
 // Coding Challenge #2
 
-class CarCl {
-  constructor(make, speed) {
-    this.make = make;
-    this.speed = speed;
-  }
+// class CarCl {
+//   constructor(make, speed) {
+//     this.make = make;
+//     this.speed = speed;
+//   }
 
-  accelerate() {
-    this.speed += 10;
-    console.log(`${this.make} is going at ${this.speed} km/h`);
-  }
+//   accelerate() {
+//     this.speed += 10;
+//     console.log(`${this.make} is going at ${this.speed} km/h`);
+//   }
 
-  brake() {
-    this.brake -= 5;
-    console.log(`${this.make} is going at ${this.speed} km/h`);
-  }
+//   brake() {
+//     this.brake -= 5;
+//     console.log(`${this.make} is going at ${this.speed} km/h`);
+//   }
 
-  get speedUS() {
-    return this.speed / 1.6;
-  }
+//   get speedUS() {
+//     return this.speed / 1.6;
+//   }
 
-  set speedUS(speed) {
-    this.speed = speed * 1.6;
+//   set speedUS(speed) {
+//     this.speed = speed * 1.6;
+//   }
+// }
+
+// const ford = new CarCl('Ford', 120);
+// console.log(ford.speedUS);
+// ford.accelerate();
+// ford.accelerate();
+// ford.brake();
+
+// ford.speedUS = 50;
+
+// console.log(ford);
+
+// -> Inheritance Between "Classes": Constructor Functions
+
+// const Person = function (firstName, birthYear) {
+//   this.firstName = firstName;
+//   this.birthYear = birthYear;
+// };
+
+// Person.prototype.calcAge = function () {
+//   console.log(2021 - this.birthYear);
+// };
+
+// const Student = function (firstName, birthYear, course) {
+// this.firstName = firstName;
+// this.birthYear = birthYear;
+
+// Inheritance
+//   Person.call(this, firstName, birthYear);
+//   this.course = course;
+// };
+
+// Linking prototypes mean inheriting the properties and methods of the parent class.
+// Student.prototype = Object.create(Person.prototype);
+
+// Student.prototype.introduce = function () {
+//   console.log(`My name is ${this.firstName} and I study ${this.course}`);
+// };
+
+// const mike = new Student('Mike', 2002, 'Computer Science');
+// mike.introduce();
+// mike.calcAge();
+
+// Challenge #3
+
+// const Car = function (make, speed) {
+//   this.make = make;
+//   this.speed = speed;
+// };
+
+// Car.prototype.accelerate = function () {
+//   this.speed += 10;
+//   console.log(`${this.make} is going at ${this.speed} km/h`);
+// };
+
+// Car.prototype.brake = function () {
+//   this.speed -= 5;
+//   console.log(`${this.make} is going at ${this.speed} km/h`);
+// };
+
+// const EV = function (make, speed, charge) {
+//   Car.call(this, make, speed);
+//   this.charge = charge;
+// };
+
+// EV.prototype = Object.create(Car.prototype);
+
+// EV.prototype.chargeBattery = function (chargeTo) {
+//   this.charge = chargeTo;
+// };
+
+// EV.prototype.accelerate = function () {
+//   this.speed += 20;
+//   this.charge--;
+//   console.log(
+//     `${this.make} is going at ${this.speed} km/h with a charge of ${this.charge}`
+//   );
+// };
+
+// const tesla = new EV('Tesla', 120, 23);
+// tesla.accelerate();
+// tesla.brake();
+
+// tesla.chargeBattery(90);
+// console.log(tesla);
+
+// -> Inheritance Between "Classes": ES6 Classes
+
+// class Person {
+//   constructor(firstName, birthYear) {
+//     this.firstName = firstName;
+//     this.birthYear = birthYear;
+//     console.log('Person Constructor');
+//   }
+
+//   calcAge() {
+//     console.log(2021 - this.birthYear);
+//   }
+// }
+
+// class Student extends Person {
+//   constructor(firstName, birthYear, course) {
+//      Always needs to happen first!
+//     super(firstName, birthYear);
+//     this.course = course;
+//     console.log('Student Constructor');
+//   }
+
+//   introduce() {
+//     console.log(`My name is ${this.firstName} and I study ${this.course}`);
+//   }
+
+//   calcAge() {
+//     console.log(`I'm ${2021 - this.birthYear} years old, but as a student`);
+//   }
+// }
+
+// const martha = new Student('Martha', 2002, 'Computer Science');
+
+// martha.introduce();
+// martha.calcAge();
+
+// -> Inheritance Between "Classes": Object.create()
+
+// prototype is a property of constructor function. It is used to add methods to the constructor function.
+
+// __proto__ is a property of an object. It is used to add methods to the object.
+
+// const PersonProto = {
+//   calcAge() {
+//     console.log(2021 - this.birthYear);
+//   },
+
+//   init(firstName, birthYear) {
+//     this.firstName = firstName;
+//     this.birthYear = birthYear;
+//   },
+// };
+
+// const steven = Object.create(PersonProto);
+
+// const StudentProto = Object.create(PersonProto);
+
+// StudentProto.init = function (firstName, birthYear, course) {
+//   PersonProto.init.call(this, firstName, birthYear);
+//   this.course = course;
+// };
+
+// StudentProto.introduce = function () {
+//   console.log(`My name is ${this.firstName} and I study ${this.course}`);
+// };
+
+// const jay = Object.create(StudentProto);
+
+// jay.init('Jay', 2002, 'Computer Science');
+
+// jay.introduce();
+
+// jay.calcAge();
+
+// console.log(steven);
+
+// -> Encapsulation: Protected Properties and Methods
+
+// Encapsulation is a way to protect the data inside an object from the outside world.
+
+class Account {
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currency = currency;
+    this._pin = pin;
+    this._movements = [];
+    this.locale = navigator.language;
+
+    console.log(`Thanks for opening an account, ${owner}`);
   }
 }
-
-const ford = new CarCl('Ford', 120);
-console.log(ford.speedUS);
-ford.accelerate();
-ford.accelerate();
-ford.brake();
-
-ford.speedUS = 50;
-
-console.log(ford);

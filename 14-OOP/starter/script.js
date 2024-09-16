@@ -174,3 +174,100 @@
 // mercedes.brake();
 
 // -> ES6 Classes
+
+class PersonCl {
+  constructor(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  }
+
+  calcAge() {
+    console.log(2021 - this.birthYear);
+  }
+
+  greet() {
+    console.log(`Hey ${this.firstName}`);
+  }
+}
+
+// new keyword is used to  called constructor function in PersonCl class.
+const noman = new PersonCl('Noman Ali', 2002);
+// console.log(noman);
+// noman.calcAge();
+
+// console.log(noman.__proto__ === PersonCl.prototype); // true
+
+// PersonCl.prototype.greet = function () {
+//   console.log(`Hey ${this.firstName}`);
+// };
+
+noman.greet();
+
+// 1. Classes are NOT hoisted
+// 2. Classes are first-class citizens
+// 3. Classes are executed in strict mode
+
+// -> Getters and Setters and Static Methods
+
+// Getters are used to get the properties of an object.
+const account = {
+  owner: 'Noman Ali',
+  movements: [100, 200, 300, 400],
+
+  get latest() {
+    return this.movements.slice(-1).pop();
+  },
+
+  set latest(mov) {
+    this.movements.push(mov);
+  },
+};
+
+console.log(account.latest);
+
+account.latest = 50;
+
+class PersonCl2 {
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
+    this.birthYear = birthYear;
+  }
+  // Methods will be added to .prototype property are called instance methods.
+  calcAge() {
+    console.log(2021 - this.birthYear);
+  }
+
+  greet() {
+    console.log(`Hey ${this.firstName}`);
+  }
+
+  get age() {
+    return 2021 - this.birthYear;
+  }
+
+  // Set a property that already exists
+  set fullName(name) {
+    if (name.includes(' ')) this._fullName = name;
+    else alert(`${name} is not a full name!`);
+  }
+
+  get fullName() {
+    return this._fullName;
+  }
+
+  // Static Method
+  static hey() {
+    console.log('Hey there ');
+    console.log(this);
+  }
+}
+
+const noman2 = new PersonCl2('Noman Ali', 2002);
+console.log(noman2.age);
+noman2.calcAge();
+
+noman2.hey();
+noman2.fullName = 'Noman Ali';
+console.log(noman2.fullName);
+
+const walter = new PersonCl2('Walter xD', 1965);

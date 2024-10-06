@@ -21,4 +21,6 @@ it("should summarize all number values in an array", () => {
 
 it("should yield NaN if a least one invalid number is provided", () => {
   const inputs = ["input", 1];
+
+  const result = add(inputs);
 });

@@ -74,3 +74,16 @@ describe("max", () => {
   });
 });
 ```
+
+### Test Driven Development (TDD)
+
+In this approach, we write tests before writing the actual code. This helps us write better code because we are forced to think about the design of our code before writing it.
+
+TDD prevents us from over-engineering solutions.
+
+- Write a failing test.
+- Write the minimum amount of code to make the test pass.
+- Refactor the code.
+
+Start From
+Testing Factorial 09

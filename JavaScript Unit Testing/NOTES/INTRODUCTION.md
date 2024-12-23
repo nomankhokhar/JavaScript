@@ -85,5 +85,18 @@ TDD prevents us from over-engineering solutions.
 - Write the minimum amount of code to make the test pass.
 - Refactor the code.
 
-Start From
-Testing Factorial 09
+### Starting the UI of Vitest
+
+Add test:ui script in package.json
+
+```json
+"scripts": {
+  "test": "vitest",
+  "test:ui": "vitest --ui",
+  "test:watch": "vitest --watch"
+}
+```
+
+- Run `npm run test:ui` to start the UI of Vitest.
+- Run `npm run test:watch` to watch the test.
+- Run `npm run test` to run the test.

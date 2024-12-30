@@ -157,4 +157,37 @@ describe("Positive and Negative Testing", () => {
 });
 ```
 
-7 Testing valueUserInput.
+### Boundary Testing
+
+- **Boundary Testing**: A testing technique that focuses on the boundaries of input values.
+
+```javascript
+export function isPriceInRange(price, min, max) {
+  return price >= min && price <= max;
+}
+```
+
+Testing the `isPriceInRange` function:
+
+- Price is in range: Test that the function returns true when the price is within the range.
+- Price is below the range: Test that the function returns false when the price is below the range.
+- Price is above the range: Test that the function returns false when the price is above the range.
+
+```javascript
+describe("isPriceInRange", () => {
+  it("should return true when price is outside of range", () => {
+    expect(isPriceInRange(-10, 0, 100)).toBe(false);
+    expect(isPriceInRange(200, 0, 100)).toBe(false);
+  });
+
+  it("should return true when price is equal to min or max", () => {
+    expect(isPriceInRange(1, 1, 10)).toBe(true);
+    expect(isPriceInRange(10, 1, 10)).toBe(true);
+  });
+
+  it("should return true if price is in range", () => {
+    expect(isPriceInRange(7, 1, 10)).toBe(true);
+    expect(isPriceInRange(2, 1, 10)).toBe(true);
+  });
+});
+```

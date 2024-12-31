@@ -191,3 +191,101 @@ describe("isPriceInRange", () => {
   });
 });
 ```
+
+### Parameterized Tests
+
+A way to run the same test multiple times with different sets of input data
+
+```javascript
+export function canDrive(age, countryCode) {
+  const legalDrivingAge = {
+    US: 16,
+    UK: 17,
+  };
+
+  if (!legalDrivingAge[countryCode]) {
+    return "Invalid country code";
+  }
+
+  return age >= legalDrivingAge[countryCode];
+}
+
+describe("canDrive", () => {
+  it("should return error for invalid country code", () => {
+    expect(canDrive(20, "FR")).toMatch(/invalid/i);
+  });
+
+  it.each([
+    { age: 15, country: "US", result: false },
+    { age: 16, country: "US", result: true },
+    { age: 17, country: "US", result: true },
+
+    { age: 16, country: "UK", result: false },
+    { age: 17, country: "UK", result: true },
+    { age: 18, country: "UK", result: true },
+  ])("should return $result for $age, $country", ({ age, country, result }) => {
+    expect(canDrive(age, country)).toBe(result);
+  });
+});
+```
+
+### Testing Asynchronous Code
+
+- **Callback Functions**: A callback function is a function that is passed as an argument to another function and is executed after some event has occurred.
+
+```javascript
+export function fetchData() {
+  return Promise.reject({ reason: "Operation failed" });
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      const data = [1, 2, 3];
+      resolve(data);
+    });
+  });
+}
+
+it("should return a problem that will resolve to an array", async () => {
+  try {
+    const result = await fetchData();
+    expect(Array.isArray(result)).toBe(true);
+    expect(result.length).toBeGreaterThan(0);
+  } catch (error) {
+    expect(error).toHaveProperty("reason");
+    expect(error.reason).toMatch(/failed/i);
+  }
+});
+```
+
+### Setup and Teardown
+
+- **beforeAll**: A function that is run once before all tests.
+
+- **afterAll**: A function that is run once after all tests.
+
+- **beforeEach**: A function that is run before each test.
+
+- **afterEach**: A function that is run after each test.
+
+```javascript
+describe("test suite", () => {
+  beforeAll(() => {
+    console.log("beforeAll called");
+  });
+
+  beforeEach(() => {
+    console.log("beforeEach called");
+  });
+
+  afterEach(() => {
+    console.log("afterEach called");
+  });
+
+  afterAll(() => {
+    console.log("afterAll called");
+  });
+
+  it("test case 1", () => {});
+
+  it("test case 2", () => {});
+});
+```

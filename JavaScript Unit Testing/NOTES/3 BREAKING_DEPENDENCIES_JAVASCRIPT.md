@@ -106,3 +106,45 @@ describe("mock test example", () => {
   });
 });
 ```
+
+### Mocking Modules
+
+```javascript
+import { getExchangeRate } from "../libs/currency";
+import { getShippingQuote } from "../libs/shipping";
+
+// When this file executed Every exported function in this module will be mocked func
+// This file will be Hoisted
+vi.mock("../libs/currency");
+vi.mock("../libs/shipping");
+
+// Now we can test the main module without worrying about the dependencies
+
+// getPriceInCurrency
+describe("getPriceInCurrency", () => {
+  it("should return price in target currency", () => {
+    vi.mocked(getExchangeRate).mockReturnValue(1.5);
+
+    const price = getPriceInCurrency(10, "AUD");
+
+    expect(price).toBe(15);
+  });
+});
+// getShippingInfo
+describe("getShippingInfo", () => {
+  it("should return unavailable if quote cannot be fetched", () => {
+    vi.mocked(getShippingQuote).mockReturnValue(null);
+    const quote = getShippingInfo("Area 51");
+    expect(quote).toMatch(/unavailable/i);
+  });
+
+  it("should return shipping info if quote can be fetched", () => {
+    vi.mocked(getShippingQuote).mockReturnValue({ cost: 10, estimatedDays: 2 });
+
+    const quote = getShippingInfo("Area 51");
+    expect(quote).toMatch("$10");
+    expect(quote).toMatch(/2 days/i);
+    expect(quote).toMatch(/shipping cost: \$10 \(2 days\)/i);
+  });
+});
+```

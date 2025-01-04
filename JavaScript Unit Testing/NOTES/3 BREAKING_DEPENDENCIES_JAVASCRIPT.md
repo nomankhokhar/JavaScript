@@ -148,3 +148,49 @@ describe("getShippingInfo", () => {
   });
 });
 ```
+
+### Partial Mocks
+
+In some cases, you may want to mock only a specific function in a module, while keeping the rest of the module intact.
+
+```javascript
+import { sendEmail } from "../libs/email";
+
+vi.mock("../libs/email", async (importOriginal) => {
+  const actual = await importOriginal();
+  return {
+    ...actual,
+    sendEmail: vi.fn(),
+  };
+});
+
+describe("signUp", () => {
+  const email = "name@domain.com";
+  it("should return false if email is not valid", async () => {
+    const result = await signUp("s");
+    expect(result).toBe(false);
+  });
+
+  it("should return true if email is valid", async () => {
+    const result = await signUp(email);
+    expect(result).toBe(true);
+  });
+
+  it("should send the welcome email if email is valid", async () => {
+    const result = await signUp(email);
+
+    expect(sendEmail).toHaveBeenCalled();
+    const args = vi.mocked(sendEmail).mock.calls[0];
+    expect(args[0]).toBe(email);
+    expect(args[1]).toMatch(/welcome/i);
+  });
+});
+```
+
+### Spying on Functions
+
+To monitor the behavior of a function during test execution
+
+```javascript
+
+```

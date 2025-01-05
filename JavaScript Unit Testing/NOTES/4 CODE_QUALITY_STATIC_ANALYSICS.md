@@ -40,3 +40,21 @@ npx eslint . --fix // Fix all fixable issues
 - Imporve code documentation and readability.
 - Better tooling for refactoring and code navigation.
 - Stronger codebase with fewer issues.
+
+### Automated Code Quality Checks with Husky
+
+A popular tool for Git hooks automation
+
+- Husky: Git hooks made easy.
+- Lint-staged: Run linters on git staged files.
+
+```bash
+npm install --D husky lint-staged
+
+- After installing husky and lint-staged,
+- add the following to pre-commit hook
+- add commands to run ESLint and Prettier
+- before committing the code into the repository
+
+npx lint-staged
+```

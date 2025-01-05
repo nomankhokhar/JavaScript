@@ -1,7 +1,10 @@
-import { vi, it, expect, describe } from "vitest";
+import { vi, it, expect, describe, beforeEach } from "vitest";
 import {
+  getDiscount,
   getPriceInCurrency,
   getShippingInfo,
+  isOnline,
+  login,
   renderPage,
   signUp,
   submitOrder,
@@ -11,6 +14,7 @@ import { getShippingQuote } from "../libs/shipping";
 import { trackPageView } from "../libs/analytics";
 import { charge } from "../libs/payment";
 import { sendEmail } from "../libs/email";
+import security from "../libs/security";
 
 // When this file executed Every exported function in this module will be mocked func
 // This file will be Hoisted
@@ -124,6 +128,12 @@ describe("submitOrder", () => {
 
 describe("signUp", () => {
   const email = "name@domain.com";
+
+  beforeEach(() => {
+    // vi.mocked(sendEmail).mockClear();
+    vi.clearAllMocks();
+  });
+
   it("should return false if email is not valid", async () => {
     const result = await signUp("s");
     expect(result).toBe(false);
@@ -137,9 +147,51 @@ describe("signUp", () => {
   it("should send the welcome email if email is valid", async () => {
     const result = await signUp(email);
 
+    // sendEmail should called once whenever signUp func called.
     expect(sendEmail).toHaveBeenCalled();
     const args = vi.mocked(sendEmail).mock.calls[0];
     expect(args[0]).toBe(email);
     expect(args[1]).toMatch(/welcome/i);
+  });
+});
+
+describe("login", () => {
+  it("should email the one-time login code", async () => {
+    const email = "name@gmail.com";
+    const spy = vi.spyOn(security, "generateCode");
+
+    await login(email);
+    const securityCode = spy.mock.results[0].value.toString();
+    expect(sendEmail).toHaveBeenCalledWith(email, securityCode);
+  });
+});
+
+describe("isOnline", () => {
+  it("should return false if current hour is outside opening hours", () => {
+    vi.setSystemTime("2024-01-01 7:59");
+    expect(isOnline()).toBe(false);
+
+    vi.setSystemTime("2024-01-01 20:01");
+    expect(isOnline()).toBe(false);
+  });
+
+  it("should return true if current hour is within opening hours", () => {
+    vi.setSystemTime("2024-01-01 8:00");
+    expect(isOnline()).toBe(true);
+
+    vi.setSystemTime("2024-01-01 19:59");
+    expect(isOnline()).toBe(true);
+  });
+});
+
+describe("getDiscount", () => {
+  it("should return .2 on Christmas day", () => {
+    vi.setSystemTime("2024-12-25 00:01");
+    expect(getDiscount()).toBe(0.2);
+  });
+
+  it("should return 0 without on Christmas day", () => {
+    vi.setSystemTime("2024-12-26 00:01");
+    expect(getDiscount()).toBe(0);
   });
 });

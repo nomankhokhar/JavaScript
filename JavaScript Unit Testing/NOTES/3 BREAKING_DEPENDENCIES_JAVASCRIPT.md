@@ -192,5 +192,78 @@ describe("signUp", () => {
 To monitor the behavior of a function during test execution
 
 ```javascript
+describe("login", () => {
+  it("should email the one-time login code", async () => {
+    const email = "name@gmail.com";
+    const spy = vi.spyOn(security, "generateCode");
 
+    await login(email);
+    const securityCode = spy.mock.results[0].value.toString();
+    expect(sendEmail).toHaveBeenCalledWith(email, securityCode);
+  });
+});
+```
+
+### Resetting Mocks
+
+```javascript
+describe("resetting mocks", () => {
+  beforeEach(() => {
+    // vi.mocked(sendEmail).mockClear();
+    vi.clearAllMocks();
+  });
+  it("should reset all mocks", () => {
+    const greet = vi.fn();
+    greet.mockReturnValue("Hello from mock!");
+
+    expect(greet()).toBe("Hello from mock!");
+
+    vi.resetAllMocks(); // Reset all mocks
+
+    expect(greet()).toBeUndefined();
+  });
+});
+```
+
+### Mocking the Date
+
+```javascript
+describe("getDayOfWeek", () => {
+  it("should return the day of the week", () => {
+    const date = new Date("2021-01-01");
+    const spy = vi.spyOn(global, "Date").mockImplementation(() => date);
+
+    const day = getDayOfWeek();
+    expect(day).toBe("Friday");
+
+    spy.mockRestore();
+  });
+});
+```
+
+### Mocking the Timer
+
+- Are deterministic
+- Are not dependent on random data
+- Are not dependent on the current time/date
+- Are not dependent on global state
+
+```javascript
+describe("isOnline", () => {
+  it("should return false if current hour is outside opening hours", () => {
+    vi.setSystemTime("2024-01-01 7:59");
+    expect(isOnline()).toBe(false);
+
+    vi.setSystemTime("2024-01-01 20:01");
+    expect(isOnline()).toBe(false);
+  });
+
+  it("should return true if current hour is within opening hours", () => {
+    vi.setSystemTime("2024-01-01 8:00");
+    expect(isOnline()).toBe(true);
+
+    vi.setSystemTime("2024-01-01 19:59");
+    expect(isOnline()).toBe(true);
+  });
+});
 ```

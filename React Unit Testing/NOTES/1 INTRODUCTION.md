@@ -28,3 +28,8 @@ npm i -D jsdom
 ```
 
 ### What to test?
+
+- How they render
+- How they respond to user interactions
+
+- **Quote** : Write tests that are maintainable, readable, robust and trustworthy.

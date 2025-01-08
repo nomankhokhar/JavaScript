@@ -85,7 +85,9 @@ describe("UserList", () => {
 
     render(<UserList users={users} />);
     users.forEach((user) => {
-      // Maybe there are many links in the docs this will check that find link only with that name user.name
+      // Get the link by the name of the user
+      // example: <a href="/users/1">Noman</a>
+      // name is the text inside the link is Noman
       const link = screen.getByRole("link", { name: user.name });
       expect(link).toBeInTheDocument();
       expect(link).toHaveAttribute("href", `/users/${user.id}`);

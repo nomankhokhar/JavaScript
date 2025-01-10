@@ -107,3 +107,24 @@ it("should render nothing if given an empty array", () => {
   expect(container).toBeEmptyDOMElement();
 });
 ```
+
+### Testing User Interaction
+
+first install the user-event library
+
+```bash
+npm install @testing-library/user-event
+```
+
+- **userEvent.click**: Simulate a user clicking on an element.
+
+```jsx
+it("should enable the button when the checkbox is checked", async () => {
+  render(<TermsAndConditions />);
+  const checkbox = screen.getByRole("checkbox");
+  const user = userEvent.setup();
+  await user.click(checkbox);
+
+  expect(screen.getByRole("button")).toBeEnabled();
+});
+```

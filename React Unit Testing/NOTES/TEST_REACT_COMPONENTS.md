@@ -182,3 +182,28 @@ describe("TermsAndConditions", () => {
 
 - Note: screen.getByRole("button", { name: /more/i });
   Above Property by name if does not match then it will throw an error our test will automatically fail.
+
+### Testing the Form
+
+- **userEvent.type**: Simulate a user typing text into an element.
+
+```jsx
+it("should call onChange when Enter is pressed", async () => {
+  const { input, onChange, user } = renderSearchBox();
+
+  const userSearch = "SearchTerm";
+  // {enter} will simulate the enter key press
+  await user.type(input, userSearch + "{enter}");
+
+  // toHaveBeenCalledWith will check if the function is called with the correct argument
+  expect(onChange).toHaveBeenCalledWith(userSearch);
+});
+
+it("should not call onChange if input field is empty", async () => {
+  const { input, onChange, user } = renderSearchBox();
+  await user.type(input, "{enter}");
+
+  // toHaveBeenCalled will check if the function is called
+  expect(onChange).not.toHaveBeenCalled();
+});
+```

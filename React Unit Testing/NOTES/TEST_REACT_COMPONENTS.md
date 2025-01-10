@@ -95,3 +95,15 @@ describe("UserList", () => {
   });
 });
 ```
+
+### Testing Images List
+
+- **src**: Matches the src attribute of the image.
+
+```jsx
+it("should render nothing if given an empty array", () => {
+  const { container } = render(<ProductImageGallery imageUrls={[]} />);
+  // Check if the container is empty that render Above component
+  expect(container).toBeEmptyDOMElement();
+});
+```

@@ -128,3 +128,57 @@ it("should enable the button when the checkbox is checked", async () => {
   expect(screen.getByRole("button")).toBeEnabled();
 });
 ```
+
+### Testing User Interaction with Button Click
+
+- **userEvent.click**: Simulate a user clicking on an element.
+
+```jsx
+it("should collapse text when Show Less button is clicked", async () => {
+  render(<ExpandableText text={longText} />);
+
+  const showMoreButton = screen.getByRole("button", { name: /more/i });
+  const user = userEvent.setup();
+  await user.click(showMoreButton);
+
+  const showLessButton = screen.getByRole("button", { name: /less/i });
+  await user.click(showLessButton);
+  expect(screen.getByText(turncateText)).toBeInTheDocument();
+  expect(showMoreButton).toHaveTextContent(/more/i);
+});
+```
+
+### Simplified Version of Testing func
+
+- renderComponents: This function will render the component and return the elements of the component that we need to check in the document.
+
+```jsx
+describe("TermsAndConditions", () => {
+  const renderCompnents = () => {
+    render(<TermsAndConditions />);
+    return {
+      heading: screen.getByRole("heading"),
+      checkbox: screen.getByRole("checkbox"),
+      button: screen.getByRole("button"),
+    };
+  };
+  it("should render with correct text and inital state", () => {
+    const { heading, button, checkbox } = renderCompnents();
+
+    expect(heading).toHaveTextContent("Terms & Conditions");
+    expect(checkbox).not.toBeChecked();
+    expect(button).toBeDisabled();
+  });
+
+  it("should enable the button when the checkbox is checked", async () => {
+    const { checkbox } = renderCompnents();
+    const user = userEvent.setup();
+    await user.click(checkbox);
+
+    expect(screen.getByRole("button")).toBeEnabled();
+  });
+});
+```
+
+- Note: screen.getByRole("button", { name: /more/i });
+  Above Property by name if does not match then it will throw an error our test will automatically fail.
